@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
-import { TUserInput, TUserOutput } from "../type";
+import { TLoginUserInput, TLoginUserOutput } from "../data/type";
+import { Link, useNavigate } from "react-router-dom";
 
 export function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const loginMutation = useMutation<TUserOutput, Error, TUserInput>({
+  const navigate = useNavigate();
+
+  const loginMutation = useMutation<TLoginUserOutput, Error, TLoginUserInput>({
     mutationFn: async (body) => {
       const response = await fetch("http://localhost:8080/api/v1/users/login", {
         method: "POST",
@@ -25,6 +28,7 @@ export function LoginPage() {
     },
     onSuccess: (data) => {
       console.log(data);
+      navigate("/");
     },
     onError: (error) => {
       console.log(error);
@@ -105,7 +109,7 @@ export function LoginPage() {
             </p>
           </form>
           <button className="text-white p-3 bg-createNewAccountBtnColour">
-            Create New Account
+            <Link to="/register">Create New Account</Link>
           </button>
         </div>
       </div>
