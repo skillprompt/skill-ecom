@@ -1,31 +1,34 @@
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { LoginPage } from "./components/LoginPage";
+
+import Register from "./components/Register";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { LoginPage } from "./components/LoginPage";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: "Homw page",
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "login",
+    element: <LoginPage />,
+  },
+]);
+
+const queryClient = new QueryClient();
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <div>
-          <h1>Homepage</h1>
-        </div>
-      ),
-    },
-    {
-      path: "login",
-      element: <LoginPage />,
-    },
-  ]);
-
-  const query = new QueryClient();
-
   return (
-    <QueryClientProvider client={query}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </>
   );
 }
-
 export default App;
