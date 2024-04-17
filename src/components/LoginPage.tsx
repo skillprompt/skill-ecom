@@ -27,8 +27,11 @@ export function LoginPage() {
       return data;
     },
     onSuccess: (data) => {
-      console.log(data);
-      navigate("/");
+      if (data.statusCode === 200) {
+        navigate("/");
+      } else {
+        navigate("/login");
+      }
     },
     onError: (error) => {
       console.log(error);
