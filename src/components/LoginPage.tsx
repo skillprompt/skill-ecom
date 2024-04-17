@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useMutation } from "react-query";
 import { TLoginUserInput, TLoginUserOutput } from "../data/type";
 import { Link, useNavigate } from "react-router-dom";
+import { IoIosCloseCircle } from "react-icons/io";
 
 export function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginFailedModalOpen, setIsLoginFailedModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -31,6 +33,10 @@ export function LoginPage() {
         navigate("/");
       } else {
         navigate("/login");
+        setIsLoginFailedModalOpen(true);
+        setTimeout(() => {
+          setIsLoginFailedModalOpen(false);
+        }, 5000);
       }
     },
     onError: (error) => {
@@ -46,7 +52,7 @@ export function LoginPage() {
   };
 
   return (
-    <div className="flex justify-around items-center h-screen w-full">
+    <div className="flex justify-around items-center h-screen w-full font-mono">
       <div className="w-[50%] flex items-center justify-center">
         {/* Division for logo and slogan */}
         <div className=" flex flex-col items-center justify-start h-[65vh]">
@@ -56,9 +62,7 @@ export function LoginPage() {
             alt="Logo Of Haat Bazaar"
           />
           <div className="text-center">
-            <h1 className="font-mono font-medium text-lg">
-              Sajilo ra sasto vanekai
-            </h1>
+            <h1 className="font-medium text-lg">Sajilo ra sasto vanekai</h1>
           </div>
         </div>
       </div>
@@ -122,6 +126,16 @@ export function LoginPage() {
           <h1 className="text-4xl text-red-700 mt-[-60px] ml-12">
             Ka password birserw hunxa!!!
           </h1>
+        </div>
+      )}
+      {isLoginFailedModalOpen && (
+        <div className="absolute inset-y-auto bg-white rounded-xl shadow-2xl flex flex-col justify-between items-center p-10">
+          <IoIosCloseCircle
+            className="absolute top-0 right-0 text-3xl text-[#68C3D4] cursor-pointer"
+            onClick={() => setIsLoginFailedModalOpen(false)}
+          />
+          <h1 className="text-2xl p-5">Login Failed</h1>
+          <h1>Please enter the correct password or username</h1>
         </div>
       )}
     </div>
