@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Register from "./components/Register";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { LoginPage } from "./components/LoginPage";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "login",
+    element: <LoginPage />,
   },
 ]);
 
@@ -26,5 +31,4 @@ function App() {
     </>
   );
 }
-
 export default App;
