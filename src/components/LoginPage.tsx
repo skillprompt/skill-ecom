@@ -100,7 +100,7 @@ export function LoginPage() {
                 setPassword(event.target.value);
               }}
             />
-            <button className="bg-loginBtnColour text-white p-3 mb-3">
+            <button className="bg-buttonColour text-white p-3 mb-3">
               Log in
             </button>
             <p
@@ -115,7 +115,7 @@ export function LoginPage() {
               Forgot Password?
             </p>
           </form>
-          <button className="text-white p-3 bg-createNewAccountBtnColour">
+          <button className="text-white p-3 bg-buttonColour">
             <Link to="/register">Create New Account</Link>
           </button>
         </div>
