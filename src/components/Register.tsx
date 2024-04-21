@@ -10,6 +10,10 @@ const Register = () => {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [invalid, setInvalid] = useState(false);
+  const [invalidUser, setInvalidUser] = useState(false);
+  const [modal, setModal] = useState(false);
 
   const username = loginStore((state) => state.username);
   const email = loginStore((state) => state.email);
@@ -45,6 +49,10 @@ const Register = () => {
       if (!response.ok) {
         const data = await response.json();
         console.log("data....", data);
+        setTimeout(() => {
+          setModal(true);
+        }, 1000);
+
         throw new Error("faild to get data");
       }
       const data = await response.json();
@@ -53,6 +61,7 @@ const Register = () => {
 
     onSuccess: (data) => {
       console.log(data, "data..............");
+
       navigate("/login");
     },
 
@@ -62,6 +71,7 @@ const Register = () => {
   });
 
   const handleSubmit = async () => {
+    setLoading(true);
     await submitMutation.mutateAsync({
       username,
       role,
@@ -72,108 +82,160 @@ const Register = () => {
   };
 
   return (
-    // this is the main container for register
-    <div className="flex justify-center items-center flex-col w-full h-screen  ">
-      {/* logo of e-commerce */}
-      <div className="mt-[-3%] mb-[-2%]">
-        {" "}
-        <img src="/logo.svg" alt="logo" className="w-[8rem]  " />
-      </div>
+    <>
+      {modal ? (
+        <div className="flex justify-center items-center w-full h-screen">
+          <div className="flex flex-col items-center gap 5 bg-red-300 w-[400px] h-[200px]">
+            <h1 className="text-3xl text-red-700 py-5">
+              this is error message
+            </h1>
+            <div>
+              <button
+                onClick={() => {
+                  setTimeout(() => {
+                    setModal(false);
+                  }, 500);
+                  setLoading(false);
+                  setInvalid(false);
+                  setInvalidUser(false);
+                }}
+                className="border-2 p-3 bg-green-400"
+              >
+                Back to register
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        // this is the main container for register
+        <div className="flex justify-center items-center flex-col w-full h-screen  ">
+          {/* logo of e-commerce */}
+          <div className="mt-[-3%] mb-[-2%]">
+            {" "}
+            <img src="/logo.svg" alt="logo" className="w-[8rem]  " />
+          </div>
 
-      {/* card of register */}
-      <div className="w-[300px] h-[485px] sm:w-[380px] sm:h-[480px]  bg-[#FFFFFF] flex justify-center items-center  flex-col p-5 shadow-lg">
-        <h1 className="text-[18px] sm:text-[20px]">Create a new account</h1>
-        <p className="text-[10px] sm:text-[14px]">It's easy and quick</p>
+          {/* card of register */}
+          <div className="w-[300px] sm:w-[380px]   bg-[#FFFFFF] flex justify-center items-center  flex-col p-5 shadow-lg">
+            <h1 className="text-[18px] sm:text-[20px]">Create a new account</h1>
+            <p className="text-[10px] sm:text-[14px]">It's easy and quick</p>
 
-        {/* form for registration */}
-        <form
-          className="flex flex-col  gap-[20px] h-full w-full mt-8 mb-5"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setLoading(true);
-            handleSubmit();
-            setTimeout(() => {
-              setLoading(false);
-            }, 10000);
-          }}
-        >
-          {/* input for username */}
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            required
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-          {/* input for role */}
-          <input
-            type="text"
-            placeholder="Role"
-            name="role"
-            value={role}
-            disabled
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            onChange={(e) => {
-              setRole(e.target.value);
-            }}
-          />
-          {/* input for email */}
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            required
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          {/* input for password */}
-          <input
-            type="pasword"
-            placeholder="password"
-            name="password"
-            value={password}
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            required
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          {/* input for conformation password */}
-          <input
-            type="pasword"
-            placeholder=" confirm password"
-            name="confirmPassowr"
-            className="p-2 border outline-slate-400 text-[14px] text-light_black"
-            required
-          />
-          {/* btn for sign up */}
-          {loading ? (
-            <button className=" py-2 bg-btnColor text-[14px] text-[#ffffff] hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
-              loading.....
-            </button>
-          ) : (
-            <button className=" py-2 bg-btnColor text-[14px] text-[#ffffff] hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
-              Sign Up
-            </button>
-          )}
-        </form>
+            {/* form for registration */}
+            <form
+              className="flex flex-col  gap-[20px] h-full w-full mt-8 mb-5"
+              onSubmit={(e) => {
+                e.preventDefault();
 
-        {/* navigate to login page if the user has an account */}
-        <Link to="/login">
-          {" "}
-          <p className="text-inputTxt text-[12px] hover:text-hoverinputTxt hover:underline-offset-4 ">
-            Already have an account?
-          </p>
-        </Link>
-      </div>
-    </div>
+                if (password != confirmPassword) {
+                  setInvalid(true);
+                  console.log("incorrect password");
+                } else {
+                  setInvalid(false);
+                }
+                for (let i = 0; i <= username.length; i++) {
+                  if (username[i] === username[i].toUpperCase()) {
+                    setInvalidUser(true);
+                  } else {
+                    invalid ? null : setInvalidUser(false);
+                  }
+                }
+
+                handleSubmit();
+              }}
+            >
+              {/* input for username */}
+              <input
+                type="text"
+                placeholder="Username"
+                name="username"
+                required
+                className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+              />
+              {invalidUser ? (
+                <p className="text-sm text-red-400 m-0 p-0">
+                  Username must be lowercase
+                </p>
+              ) : null}
+              {/* input for role */}
+              <input
+                type="text"
+                placeholder="Role"
+                name="role"
+                value={role}
+                disabled
+                className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+                onChange={(e) => {
+                  setRole(e.target.value);
+                }}
+              />
+              {/* input for email */}
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                required
+                className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              {/* input for password */}
+              <input
+                type="password"
+                placeholder="password"
+                name="password"
+                value={password}
+                className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+                required
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              {/* input for conformation password */}
+              <input
+                type="password"
+                placeholder=" confirm password"
+                name="confirmPassowr"
+                value={confirmPassword}
+                className="p-2 border outline-slate-400 text-[14px] text-light_black"
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                }}
+                required
+              />
+              {invalid ? (
+                <p className="text-sm text-red-400 m-0 p-0">
+                  not match with the passowrd
+                </p>
+              ) : null}
+              {/* btn for sign up */}
+              {loading ? (
+                <button className=" py-2 bg-btnColor text-[14px] text-[#ffffff] hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
+                  loading.....
+                </button>
+              ) : (
+                <button className=" py-2 bg-btnColor text-[14px] text-[#ffffff] hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
+                  Sign Up
+                </button>
+              )}
+            </form>
+
+            {/* navigate to login page if the user has an account */}
+            <Link to="/login">
+              {" "}
+              <p className="text-inputTxt text-[12px] hover:text-hoverinputTxt hover:underline-offset-4 ">
+                Already have an account?
+              </p>
+            </Link>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
