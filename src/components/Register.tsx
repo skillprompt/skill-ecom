@@ -25,6 +25,8 @@ const Register = () => {
   const setRole = loginStore((state) => state.setRole);
   const setPassword = loginStore((state) => state.setPassword);
 
+  const [invalidEntry, setInvalidEntry] = useState(false);
+
   // using useNavigate to navigate to login URL when the data fetching is success
   const navigate = useNavigate();
 
@@ -125,22 +127,9 @@ const Register = () => {
               className="flex flex-col  gap-[20px] h-full w-full mt-8 mb-5"
               onSubmit={(e) => {
                 e.preventDefault();
-
-                if (password != confirmPassword) {
-                  setInvalid(true);
-                  console.log("incorrect password");
-                } else {
-                  setInvalid(false);
+                if (!invalidEntry) {
+                  handleSubmit();
                 }
-                for (let i = 0; i <= username.length; i++) {
-                  if (username[i] === username[i].toUpperCase()) {
-                    setInvalidUser(true);
-                  } else {
-                    invalid ? null : setInvalidUser(false);
-                  }
-                }
-
-                handleSubmit();
               }}
             >
               {/* input for username */}
@@ -153,6 +142,15 @@ const Register = () => {
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
+                  console.log(username, "mg.....");
+                  const lowercase = username.toLowerCase();
+                  if (username != lowercase) {
+                    setInvalidUser(true);
+                    setInvalidEntry(true);
+                  } else {
+                    setInvalidUser(false);
+                    setInvalidEntry(false);
+                  }
                 }}
               />
               {invalidUser ? (
@@ -205,6 +203,14 @@ const Register = () => {
                 className="p-2 border outline-slate-400 text-[14px] text-light_black"
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
+                  if (password != confirmPassword) {
+                    setInvalid(true);
+                    setInvalidEntry(true);
+                    console.log("incorrect password");
+                  } else {
+                    setInvalid(false);
+                    setInvalidEntry(false);
+                  }
                 }}
                 required
               />
