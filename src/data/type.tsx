@@ -25,6 +25,6 @@ export type TLoginUserOutput = {
 };
 
 export type TLoginUserInput = {
-  username: string,
-  password: string
+  username: string;
+  password: string;
 };

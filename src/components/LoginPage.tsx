@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
 import { TLoginUserInput, TLoginUserOutput } from "../data/type";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoIosCloseCircle } from "react-icons/io";
 
 export function LoginPage() {
