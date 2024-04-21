@@ -1,14 +1,16 @@
+import Nabbar from './Component/Nabbar';
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Register from "./components/Register";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { LoginPage } from "./components/LoginPage";
+import Nabbar from './Component/Nabbar';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: "Homw page",
+    element: <Nabbar />,
   },
   {
     path: "/register",
