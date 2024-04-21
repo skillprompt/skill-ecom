@@ -9,7 +9,8 @@ export function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoginFailedModalOpen, setIsLoginFailedModalOpen] = useState(false);
+  const [isLoginFailedModalOpen, setIsLoginFailedModalOpen] =
+    useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -87,6 +88,7 @@ export function LoginPage() {
               placeholder="username"
               value={username}
               required
+              maxLength={16}
               onChange={(event) => {
                 setUsername(event.target.value);
               }}
@@ -97,6 +99,7 @@ export function LoginPage() {
               placeholder="password"
               value={password}
               required
+              maxLength={20}
               onChange={(event) => {
                 setPassword(event.target.value);
               }}
