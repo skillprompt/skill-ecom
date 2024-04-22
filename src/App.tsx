@@ -3,11 +3,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Register from "./components/Register";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { LoginPage } from "./components/LoginPage";
+import { Navbar } from "./components/Navbar";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: "Homw page",
+    element: <Navbar />,
   },
   {
     path: "/register",

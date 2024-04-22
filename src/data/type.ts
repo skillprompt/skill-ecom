@@ -1,4 +1,4 @@
-export type TUserOutput = {
+export type TLoginUserOutput = {
   statusCode: 200;
   data: {
     user: {
@@ -24,7 +24,7 @@ export type TUserOutput = {
   success: boolean;
 };
 
-export type TUserInput = {
-  username: string,
-  password: string
+export type TLoginUserInput = {
+  username: string;
+  password: string;
 };
