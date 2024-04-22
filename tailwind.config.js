@@ -9,6 +9,7 @@ export default {
     extend: {
       colors:{
         btnColor:"#39844F",
+        btnTxtColor:"#ffffff",
         inputTxt:"#aaaaaa",
         hoverinputTxt:"#6C90C7",
         light_black:"#292626",
