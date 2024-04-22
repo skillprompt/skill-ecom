@@ -1,25 +1,33 @@
 import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { TRegisterInput, TRegisterOutput } from "../data/registerTypes";
-import { loginStore } from "../store/store";
+import {
+  TRegisterInput,
+  TRegisterInputForm,
+  TRegisterOutput,
+} from "../data/registerTypes";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { registerSchema } from "../validation/registervalidation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Register = () => {
-  // const [username, setUsername] = useState("");
-  // const [role, setRole] = useState("ADMIN");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState(false);
 
-  const username = loginStore((state) => state.username);
-  const email = loginStore((state) => state.email);
-  const role = loginStore((state) => state.role);
-  const password = loginStore((state) => state.password);
-
-  const setUsername = loginStore((state) => state.setUsername);
-  const setEmail = loginStore((state) => state.setEmail);
-  const setRole = loginStore((state) => state.setRole);
-  const setPassword = loginStore((state) => state.setPassword);
+  // using react-hook-form to build a registerForm
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TRegisterInputForm>({
+    resolver: zodResolver(registerSchema),
+    mode: "onChange",
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      role: "ADMIN",
+    },
+  });
 
   // using useNavigate to navigate to login URL when the data fetching is success
   const navigate = useNavigate();
@@ -45,14 +53,19 @@ const Register = () => {
       if (!response.ok) {
         const data = await response.json();
         console.log("data....", data);
+        setTimeout(() => {
+          setModal(true);
+        }, 200);
         throw new Error("faild to get data");
       }
+      setModal(false);
       const data = await response.json();
       return data;
     },
 
     onSuccess: (data) => {
       console.log(data, "data..............");
+
       navigate("/login");
     },
 
@@ -61,119 +74,135 @@ const Register = () => {
     },
   });
 
-  const handleSubmit = async () => {
+  const handleRegisterSubmit: SubmitHandler<TRegisterInput> = async (data) => {
     await submitMutation.mutateAsync({
-      username,
-      role,
-      email,
-      password,
+      username: data.username,
+      role: data.role,
+      email: data.email,
+      password: data.password,
     });
-    console.log("Set loading to true");
   };
 
   return (
-    // this is the main container for register
-    <div className="flex justify-center items-center flex-col w-full h-screen  ">
-      {/* logo of e-commerce */}
-      <div className="mt-[-3%] mb-[-2%]">
-        {" "}
-        <img src="/logo.svg" alt="logo" className="w-[8rem]  " />
+    <>
+      {/* // this is the main container for register */}
+      <div className="flex justify-center items-center flex-col w-full h-screen  ">
+        {/* logo of e-commerce */}
+        <div className="mt-[-3%] mb-[-2%]">
+          {" "}
+          <img src="/logo.svg" alt="logo" className="w-[8rem]  " />
+        </div>
+
+        {/* card of register */}
+        <div className="w-[300px] sm:w-[380px]   bg-[#FFFFFF] flex justify-center items-center  flex-col p-5 shadow-lg">
+          <h1 className="text-[18px] sm:text-[20px]">Create a new account</h1>
+          <p className="text-[10px] sm:text-[14px]">It's easy and quick</p>
+
+          {/* form for registration */}
+          <form
+            className="flex flex-col  gap-[20px] h-full w-full mt-8 mb-5"
+            onSubmit={handleSubmit(handleRegisterSubmit)}
+          >
+            {/* input for username */}
+            <input
+              type="text"
+              placeholder="Username"
+              required
+              {...register("username")}
+              className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+            />
+
+            {/* input for role */}
+            <input
+              type="text"
+              placeholder="Role"
+              {...register("role")}
+              disabled
+              className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+            />
+            {/* input for email */}
+            <input
+              type="email"
+              placeholder="Email"
+              {...register("email")}
+              required
+              className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+            />
+            {errors.email && (
+              <p className="text-red-500">{`${errors.email.message}`} </p>
+            )}
+            {/* input for password */}
+            <input
+              type="password"
+              placeholder="password"
+              {...register("password")}
+              className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+              required
+            />
+            {errors.password && (
+              <p className="text-red-500">{`${errors.password.message}`} </p>
+            )}
+            {/* input for conformation password */}
+            <input
+              type="password"
+              placeholder=" confirm password"
+              {...register("confirmPassword")}
+              className="p-2 border outline-slate-400 text-[14px] text-light_black"
+              required
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-500">
+                {`${errors.confirmPassword.message}`}{" "}
+              </p>
+            )}
+            {/* btn for sign up */}
+
+            <button className=" py-2 bg-btnColor text-[14px] text-btnTxtColor hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
+              {submitMutation.isLoading ? "Loading..... " : "Signup"}
+            </button>
+          </form>
+
+          {/* navigate to login page if the user has an account */}
+          <Link to="/login">
+            {" "}
+            <p className="text-[#252525e7] text-[12px] hover:text-hoverinputTxt hover:underline-offset-4 ">
+              Already have an account?
+            </p>
+          </Link>
+        </div>
       </div>
 
-      {/* card of register */}
-      <div className="w-[300px] h-[485px] sm:w-[380px] sm:h-[480px]  bg-[#FFFFFF] flex justify-center items-center  flex-col p-5 shadow-lg">
-        <h1 className="text-[18px] sm:text-[20px]">Create a new account</h1>
-        <p className="text-[10px] sm:text-[14px]">It's easy and quick</p>
-
-        {/* form for registration */}
-        <form
-          className="flex flex-col  gap-[20px] h-full w-full mt-8 mb-5"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setLoading(true);
-            handleSubmit();
+      {/* setting a modal to open a popup message  */}
+      {modal ? (
+        <div
+          className="flex justify-center items-center w-full h-screen absolute top-0
+        left-0 bg-[#464343ca]"
+          onClick={() => {
             setTimeout(() => {
-              setLoading(false);
-            }, 10000);
+              setModal(false);
+            }, 200);
           }}
         >
-          {/* input for username */}
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            required
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-          {/* input for role */}
-          <input
-            type="text"
-            placeholder="Role"
-            name="role"
-            value={role}
-            disabled
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            onChange={(e) => {
-              setRole(e.target.value);
-            }}
-          />
-          {/* input for email */}
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            required
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          {/* input for password */}
-          <input
-            type="pasword"
-            placeholder="password"
-            name="password"
-            value={password}
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            required
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          {/* input for conformation password */}
-          <input
-            type="pasword"
-            placeholder=" confirm password"
-            name="confirmPassowr"
-            className="p-2 border outline-slate-400 text-[14px] text-light_black"
-            required
-          />
-          {/* btn for sign up */}
-          {loading ? (
-            <button className=" py-2 bg-btnColor text-[14px] text-[#ffffff] hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
-              loading.....
-            </button>
-          ) : (
-            <button className=" py-2 bg-btnColor text-[14px] text-[#ffffff] hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
-              Sign Up
-            </button>
-          )}
-        </form>
-
-        {/* navigate to login page if the user has an account */}
-        <Link to="/login">
-          {" "}
-          <p className="text-inputTxt text-[12px] hover:text-hoverinputTxt hover:underline-offset-4 ">
-            Already have an account?
-          </p>
-        </Link>
-      </div>
-    </div>
+          <div className="flex flex-col items-center  justify-center gap 5 bg-[#ffffff]  shadow-lg p-7">
+            <h1 className=" text-[#131313be] pb-3 font-semibold">
+              User with email or username already exists
+            </h1>
+            <div>
+              <button
+                onClick={() => {
+                  setTimeout(() => {
+                    setModal(false);
+                  }, 200);
+                }}
+                className="border-2 py-[6px] px-3 bg-btnColor text-btnTxtColor hover:bg[#4cab58] transition ease-in-out duration-700 se"
+              >
+                Back to register
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 };
 
