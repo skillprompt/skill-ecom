@@ -61,3 +61,15 @@ export type TForgotPasswordOutput = {
   message: string;
   success: boolean;
 };
+
+
+export type TRoleChangeOutput = {
+  data:object;
+  message: string;
+  statusCode: 200;
+  success: boolean;
+};
+
+export type TRoleChangeInput = {
+  role:string;
+}
