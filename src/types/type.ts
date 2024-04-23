@@ -28,3 +28,14 @@ export type TLoginUserInput = {
   username: string;
   password: string;
 };
+
+export type TRoleChangeOutput = {
+  data:object;
+  message: string;
+  statusCode: 200;
+  success: boolean;
+};
+
+export type TRoleChangeInput = {
+  role:string;
+}

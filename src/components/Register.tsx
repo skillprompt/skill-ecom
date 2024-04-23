@@ -4,14 +4,60 @@ import {
   TRegisterInput,
   TRegisterInputForm,
   TRegisterOutput,
-} from "../data/registerTypes";
+} from "../types/registerTypes";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { registerSchema } from "../validation/registervalidation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ClipLoader } from "react-spinners";
+
+// import { TRoleChangeInput, TRoleChangeOutput } from "../types/type";
+// import { mutationAssignRole } from "../data/AsignRole";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { toast } from "sonner";
 
 const Register = () => {
-  const [modal, setModal] = useState(false);
+  const [type, setType] = useState({
+    typePassword: "password",
+    typeConformPassword: "password",
+  });
+
+  const [showHiddenIcon, setShowHiddenIcon] = useState({
+    togglePassword: false,
+    toggleConfirmPassword: false,
+  });
+
+  // writing a conditon for toggleing a password
+  const handleTogglePassword = () => {
+    if (type.typePassword === "password") {
+      setType({ ...type, typePassword: "text" });
+      setShowHiddenIcon({ ...showHiddenIcon, togglePassword: true });
+    } else {
+      setType({ ...type, typePassword: "password" });
+      setShowHiddenIcon({ ...showHiddenIcon, togglePassword: false });
+    }
+  };
+
+  const handleToggleConfirmPassword = () => {
+    if (type.typeConformPassword === "password") {
+      setType({ ...type, typeConformPassword: "text" });
+      setShowHiddenIcon({ ...showHiddenIcon, toggleConfirmPassword: true });
+    } else {
+      setType({ ...type, typeConformPassword: "password" });
+      setShowHiddenIcon({ ...showHiddenIcon, toggleConfirmPassword: false });
+    }
+  };
+
+  // this is the function for notification in success data with use of sonner toast
+  const notifysuccess = () => {
+    toast.success("successfully  register your account");
+  };
+
+  // this is the function for notification in errors data with use of sonner toast
+  const notifyErrors = (data: TRegisterOutput) => {
+    toast.error(data.message);
+  };
 
   // using react-hook-form to build a registerForm
   const {
@@ -25,7 +71,7 @@ const Register = () => {
       username: "",
       email: "",
       password: "",
-      role: "ADMIN",
+      role: "",
     },
   });
 
@@ -53,12 +99,10 @@ const Register = () => {
       if (!response.ok) {
         const data = await response.json();
         console.log("data....", data);
-        setTimeout(() => {
-          setModal(true);
-        }, 200);
+        notifyErrors(data);
         throw new Error("faild to get data");
       }
-      setModal(false);
+
       const data = await response.json();
       return data;
     },
@@ -67,6 +111,7 @@ const Register = () => {
       console.log(data, "data..............");
 
       navigate("/login");
+      notifysuccess();
     },
 
     onError: (error) => {
@@ -74,6 +119,7 @@ const Register = () => {
     },
   });
 
+  // here calling a mutation function in a submit function
   const handleRegisterSubmit: SubmitHandler<TRegisterInput> = async (data) => {
     await submitMutation.mutateAsync({
       username: data.username,
@@ -97,7 +143,6 @@ const Register = () => {
         <div className="w-[300px] sm:w-[380px]   bg-[#FFFFFF] flex justify-center items-center  flex-col p-5 shadow-lg">
           <h1 className="text-[18px] sm:text-[20px]">Create a new account</h1>
           <p className="text-[10px] sm:text-[14px]">It's easy and quick</p>
-
           {/* form for registration */}
           <form
             className="flex flex-col  gap-[20px] h-full w-full mt-8 mb-5"
@@ -111,15 +156,31 @@ const Register = () => {
               {...register("username")}
               className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
             />
-
+            {errors.username && (
+              <p className="text-red-500">{`${errors.username.message}`}</p>
+            )}
             {/* input for role */}
-            <input
-              type="text"
-              placeholder="Role"
+
+            <select
               {...register("role")}
-              disabled
+              aria-placeholder="Role"
               className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            />
+              required
+            >
+              <option
+                value=""
+                disabled
+                selected
+                className="hidden text-inputTxt"
+              >
+                Roles
+              </option>
+              <option className="p-3">USER</option>
+              <option className="p-3">ADMIN</option>
+            </select>
+            {errors.role && (
+              <p className="text-red-500">{`${errors.role.message}`} </p>
+            )}
             {/* input for email */}
             <input
               type="email"
@@ -132,24 +193,42 @@ const Register = () => {
               <p className="text-red-500">{`${errors.email.message}`} </p>
             )}
             {/* input for password */}
-            <input
-              type="password"
-              placeholder="password"
-              {...register("password")}
-              className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-              required
-            />
+            <div className="flex relative items-center">
+              <input
+                type={type.typePassword}
+                placeholder="Password"
+                {...register("password")}
+                className=" w-full p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+                required
+              />
+              <div className="absolute right-2" onClick={handleTogglePassword}>
+                {showHiddenIcon.togglePassword ? <FaEye /> : <FaEyeSlash />}
+              </div>
+            </div>
+
             {errors.password && (
               <p className="text-red-500">{`${errors.password.message}`} </p>
             )}
             {/* input for conformation password */}
-            <input
-              type="password"
-              placeholder=" confirm password"
-              {...register("confirmPassword")}
-              className="p-2 border outline-slate-400 text-[14px] text-light_black"
-              required
-            />
+            <div className="flex relative items-center">
+              <input
+                type={type.typeConformPassword}
+                placeholder=" Confirm password"
+                {...register("confirmPassword")}
+                className="w-full p-2 border outline-slate-400 text-[14px] text-light_black"
+                required
+              />
+              <div
+                className="absolute right-2"
+                onClick={handleToggleConfirmPassword}
+              >
+                {showHiddenIcon.toggleConfirmPassword ? (
+                  <FaEye />
+                ) : (
+                  <FaEyeSlash />
+                )}
+              </div>
+            </div>
             {errors.confirmPassword && (
               <p className="text-red-500">
                 {`${errors.confirmPassword.message}`}{" "}
@@ -158,50 +237,24 @@ const Register = () => {
             {/* btn for sign up */}
 
             <button className=" py-2 bg-btnColor text-[14px] text-btnTxtColor hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
-              {submitMutation.isLoading ? "Loading..... " : "Signup"}
+              {submitMutation.isLoading ? (
+                <div className="flex w-full items-center justify-center gap-1">
+                  <ClipLoader color="#36d7b7" size={18} />
+                  <p>Loading....</p>
+                </div>
+              ) : (
+                "Signup"
+              )}
             </button>
           </form>
-
           {/* navigate to login page if the user has an account */}
           <Link to="/login">
-            {" "}
-            <p className="text-[#252525e7] text-[12px] hover:text-hoverinputTxt hover:underline-offset-4 ">
+            <p className="text-[#252525] text-[14px] hover:text-hoverinputTxt hover:underline-offset-4 transition duration-500">
               Already have an account?
             </p>
           </Link>
         </div>
       </div>
-
-      {/* setting a modal to open a popup message  */}
-      {modal ? (
-        <div
-          className="flex justify-center items-center w-full h-screen absolute top-0
-        left-0 bg-[#464343ca]"
-          onClick={() => {
-            setTimeout(() => {
-              setModal(false);
-            }, 200);
-          }}
-        >
-          <div className="flex flex-col items-center  justify-center gap 5 bg-[#ffffff]  shadow-lg p-7">
-            <h1 className=" text-[#131313be] pb-3 font-semibold">
-              User with email or username already exists
-            </h1>
-            <div>
-              <button
-                onClick={() => {
-                  setTimeout(() => {
-                    setModal(false);
-                  }, 200);
-                }}
-                className="border-2 py-[6px] px-3 bg-btnColor text-btnTxtColor hover:bg[#4cab58] transition ease-in-out duration-700 se"
-              >
-                Back to register
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
     </>
   );
 };
