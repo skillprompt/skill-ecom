@@ -134,7 +134,7 @@ const Register = () => {
             {/* input for password */}
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
               {...register("password")}
               className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
               required
@@ -145,7 +145,7 @@ const Register = () => {
             {/* input for conformation password */}
             <input
               type="password"
-              placeholder=" confirm password"
+              placeholder="Confirm password"
               {...register("confirmPassword")}
               className="p-2 border outline-slate-400 text-[14px] text-light_black"
               required

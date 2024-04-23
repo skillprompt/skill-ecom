@@ -1,4 +1,4 @@
-import logo from "../images/logo.svg";
+import logo from "../../public/logo.svg";
 import { BsCart4 } from "react-icons/bs";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
