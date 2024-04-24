@@ -41,15 +41,8 @@ export function Navabar() {
           <Button.Group className="flex items-center justify-center ">
             <Link to="/login">
               <Button className="!bg-white border-none text-black flex items-center ! ">
-                <CgProfile className="text-[18px] " />
+                <CgProfile className="text-[20px] " />
                 <p className="text-[12px] sm:text-[14px] ml-2">Login</p>
-              </Button>
-            </Link>
-
-            <h1 className="font-bold">|</h1>
-            <Link to="/register">
-              <Button className="!bg-white border-none text-black">
-                <p className="text-[12px] sm:text-[14px] ">Sign Up</p>
               </Button>
             </Link>
           </Button.Group>
@@ -57,7 +50,7 @@ export function Navabar() {
         <Navbar.Toggle />
 
         <Navbar.Collapse>
-          <div className="flex flex-col sm:flex-row h-full items-center justify-between gap-7">
+          <div className="flex flex-col sm:flex-row h-full items-center justify-between gap-10">
             {/* <Button className="!bg-white border-none text-black">
               Choose a language
               <RiArrowDropDownLine size={24} />
