@@ -1,6 +1,6 @@
 import { IoIosCloseCircle } from "react-icons/io";
 import { useMutation } from "react-query";
-import { TForgotPasswordInput, TForgotPasswordOutput } from "../data/type";
+import { TForgotPasswordInput, TForgotPasswordOutput } from "../types/type";
 import { toast } from "sonner";
 import { useLoginStore } from "../store/loginStore";
 
@@ -41,11 +41,10 @@ export function ForgotPasswordModal() {
     },
     onSuccess: (data) => {
       setIsSubmitting(false);
+      toast.success(data.message);
       if (data.statusCode === 200) {
         console.log("onSuccess data ", data);
-        toast.success(data.message);
-      } else {
-        toast.error(data.message);
+        setIsForgotPasswordModalOpen(false);
       }
     },
     onError: (error) => {

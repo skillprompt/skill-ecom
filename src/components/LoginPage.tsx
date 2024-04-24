@@ -37,6 +37,7 @@ export function LoginPage() {
     },
     onSuccess: (data) => {
       if (data.statusCode === 200) {
+        setPassword("");
         navigate("/");
       } else {
         toast.error(data.message);
