@@ -132,11 +132,10 @@ const Register = () => {
   return (
     <>
       {/* // this is the main container for register */}
-      <div className="flex justify-center items-center flex-col w-full h-screen  ">
+      <div className="flex justify-center items-center flex-col w-full py-9 ">
         {/* logo of e-commerce */}
-        <div className="mt-[-3%] mb-[-2%]">
-          {" "}
-          <img src="/logo.svg" alt="logo" className="w-[8rem]  " />
+        <div className="w-[100px] sm:w-[110px] pb-4">
+          <img src="/logo.png" alt="logo" className=" w-full" />
         </div>
 
         {/* card of register */}
