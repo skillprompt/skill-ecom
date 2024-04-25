@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from "sonner";
 import { ForgotPasswordModal } from "./ForgotPasswordModal";
 import { useLoginStore } from "../store/loginStore";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export function LoginPage() {
   const username = useLoginStore((state) => state.username);
@@ -16,6 +17,10 @@ export function LoginPage() {
   );
   const setIsForgotPasswordModalOpen = useLoginStore(
     (state) => state.setIsForgotPasswordModalOpen
+  );
+  const isPasswordVisible = useLoginStore((state) => state.isPasswordVisible);
+  const setIsPasswordVisible = useLoginStore(
+    (state) => state.setIsPasswordVisible
   );
 
   const navigate = useNavigate();
@@ -44,7 +49,7 @@ export function LoginPage() {
       }
     },
     onError: (error) => {
-      console.log(error);
+      toast.error(error.message);
     },
   });
 
@@ -82,28 +87,62 @@ export function LoginPage() {
           >
             <h1 className="text-[18px]">Log into Haat Bazaar</h1>
             {/* Input field */}
-            <input
-              className="p-2 my-5 border"
-              type="text"
-              placeholder="Username"
-              value={username}
-              required
-              maxLength={25}
-              onChange={(event) => {
-                setUsername(event.target.value);
-              }}
-            />
-            <input
-              className="p-2 mb-5 border"
-              type="password"
-              placeholder="Password"
-              value={password}
-              required
-              maxLength={25}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-            />
+            <div>
+              <input
+                className="p-2 my-5 border w-full"
+                type="text"
+                placeholder="Username"
+                value={username}
+                required
+                maxLength={30}
+                onChange={(event) => {
+                  setUsername(event.target.value);
+                }}
+              />
+            </div>
+            <div className="relative flex">
+              {isPasswordVisible ? (
+                <input
+                  className="p-2 mb-5 border w-full"
+                  type="text"
+                  placeholder="Password"
+                  value={password}
+                  required
+                  maxLength={30}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+              ) : (
+                <input
+                  className="p-2 mb-5 border w-full"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  required
+                  maxLength={30}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+              )}
+
+              {isPasswordVisible ? (
+                <FaEye
+                  className="absolute right-2 top-3 cursor-pointer"
+                  onClick={() => {
+                    setIsPasswordVisible(!isPasswordVisible);
+                  }}
+                />
+              ) : (
+                <FaEyeSlash
+                  className="absolute right-2 top-3 cursor-pointer"
+                  onClick={() => {
+                    setIsPasswordVisible(!isPasswordVisible);
+                  }}
+                />
+              )}
+            </div>
             <button className="bg-buttonColour text-white p-2 mb-3 text-[17px] hover:bg-hoverButtonColour">
               Log in
             </button>
@@ -116,7 +155,7 @@ export function LoginPage() {
               Forgot Password?
             </p>
           </form>
-          <Link to="/register">
+          <Link to="/register" onClick={() => setPassword("")}>
             <button className="text-white p-2 bg-buttonColour text-[17px] px-4 hover:bg-hoverButtonColour">
               Create New Account
             </button>
