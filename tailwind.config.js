@@ -12,6 +12,7 @@ export default {
         btnTxtColor:"#ffffff",
         inputColor:"#F0F5FF",
         inputTxt:"#aaaaaa",
+        catogriesBg:"#2E2E2E",
         hoverinputTxt:"#6C90C7",
         light_black:"#292626",
         loginBtnColour: "#68C3D4",
