@@ -13,10 +13,10 @@ export function ForgotPasswordModal() {
   );
   const isSubmitting = useLoginStore((state) => state.isSubmitting);
   const setIsSubmitting = useLoginStore((state) => state.setIsSubmitting);
-
   const setIsForgotPasswordModalOpen = useLoginStore(
     (state) => state.setIsForgotPasswordModalOpen
   );
+  const setPassword = useLoginStore((state) => state.setPassword);
 
   const forgotPasswordMutation = useMutation<
     TForgotPasswordOutput,
@@ -37,18 +37,21 @@ export function ForgotPasswordModal() {
         }
       );
       const data = await response.json();
+      setIsSubmitting(false);
+      setPassword("");
+      setForgotPasswordEmail("");
       return data;
     },
     onSuccess: (data) => {
-      setIsSubmitting(false);
-      toast.success(data.message);
       if (data.statusCode === 200) {
-        console.log("onSuccess data ", data);
+        toast.success(data.message);
         setIsForgotPasswordModalOpen(false);
+      } else {
+        toast.error(data.message);
       }
     },
     onError: (error) => {
-      console.log("onError error ", error);
+      toast.error(error.message);
     },
   });
 
