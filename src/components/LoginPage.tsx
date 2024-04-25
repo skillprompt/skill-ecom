@@ -1,16 +1,27 @@
-import { useState } from "react";
 import { useMutation } from "react-query";
 import { TLoginUserInput, TLoginUserOutput } from "../types/type";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { IoIosCloseCircle } from "react-icons/io";
+import { Toaster, toast } from "sonner";
+import { ForgotPasswordModal } from "./ForgotPasswordModal";
+import { useLoginStore } from "../store/loginStore";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoginFailedModalOpen, setIsLoginFailedModalOpen] =
-    useState<boolean>(false);
+  const username = useLoginStore((state) => state.username);
+  const setUsername = useLoginStore((state) => state.setUsername);
+  const password = useLoginStore((state) => state.password);
+  const setPassword = useLoginStore((state) => state.setPassword);
+  const isForgotPasswordModalOpen = useLoginStore(
+    (state) => state.isForgotPasswordModalOpen
+  );
+  const setIsForgotPasswordModalOpen = useLoginStore(
+    (state) => state.setIsForgotPasswordModalOpen
+  );
+  const isPasswordVisible = useLoginStore((state) => state.isPasswordVisible);
+  const setIsPasswordVisible = useLoginStore(
+    (state) => state.setIsPasswordVisible
+  );
 
   const navigate = useNavigate();
 
@@ -27,22 +38,19 @@ export function LoginPage() {
         }),
       });
       const data = await response.json();
-      console.log("data", data);
       return data;
     },
     onSuccess: (data) => {
       if (data.statusCode === 200) {
+        setPassword("");
         navigate("/");
       } else {
-        navigate("/login");
-        setIsLoginFailedModalOpen(true);
-        setTimeout(() => {
-          setIsLoginFailedModalOpen(false);
-        }, 5000);
+        toast.error(data.message);
       }
     },
     onError: (error) => {
-      console.log(error);
+      toast.error(error.message);
+      throw new Error(error.message);
     },
   });
 
@@ -54,7 +62,7 @@ export function LoginPage() {
   };
 
   return (
-    <div className="flex justify-around items-center h-screen w-full font-mono">
+    <div className="flex justify-around items-center h-screen w-full">
       <div className="w-[50%] flex items-center justify-center">
         {/* Division for logo and slogan */}
         <div className=" flex flex-col items-center justify-start h-[65vh]">
@@ -63,9 +71,7 @@ export function LoginPage() {
             src="/public/HaatBazaarLogo.svg"
             alt="Logo Of Haat Bazaar"
           />
-          <div className="text-center">
-            <h1 className="font-medium text-lg">Sajilo ra sasto vanekai</h1>
-          </div>
+          <h1 className="text-[16px] text-center">Sajilo ra sasto vanekai</h1>
         </div>
       </div>
 
@@ -80,68 +86,92 @@ export function LoginPage() {
               handleLoginUserSubmission();
             }}
           >
-            <h1 className="text-xl font-light">Log into Haat Bazaar</h1>
+            <h1 className="text-[18px]">Log into Haat Bazaar</h1>
             {/* Input field */}
-            <input
-              className="p-4 my-5 border-[1px]"
-              type="text"
-              placeholder="username"
-              value={username}
-              required
-              maxLength={16}
-              onChange={(event) => {
-                setUsername(event.target.value);
-              }}
-            />
-            <input
-              className="p-4 mb-5 border-[1px]"
-              type="password"
-              placeholder="password"
-              value={password}
-              required
-              maxLength={20}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-            />
-            <button className="bg-buttonColour text-white p-3 mb-3">
+            <div>
+              <input
+                className="p-2 my-5 border w-full"
+                type="text"
+                placeholder="Username"
+                value={username}
+                required
+                maxLength={30}
+                onChange={(event) => {
+                  setUsername(event.target.value);
+                }}
+              />
+            </div>
+            <div className="relative flex">
+              {isPasswordVisible ? (
+                <input
+                  className="p-2 mb-5 border w-full"
+                  type="text"
+                  placeholder="Password"
+                  value={password}
+                  required
+                  maxLength={30}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+              ) : (
+                <input
+                  className="p-2 mb-5 border w-full"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  required
+                  maxLength={30}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+              )}
+
+              {isPasswordVisible ? (
+                <FaEye
+                  className="absolute right-2 top-3 cursor-pointer"
+                  onClick={() => {
+                    setIsPasswordVisible(!isPasswordVisible);
+                  }}
+                />
+              ) : (
+                <FaEyeSlash
+                  className="absolute right-2 top-3 cursor-pointer"
+                  onClick={() => {
+                    setIsPasswordVisible(!isPasswordVisible);
+                  }}
+                />
+              )}
+            </div>
+            <button className="bg-buttonColour text-white p-2 mb-3 text-[17px] hover:bg-hoverButtonColour">
               Log in
             </button>
             <p
-              className="text-forgotPasswordColour"
+              className="text-forgotPasswordColour cursor-pointer text-[14px] hover:underline"
               onClick={() => {
-                setIsModalOpen(true);
-                setTimeout(() => {
-                  setIsModalOpen(false);
-                }, 4000);
+                setIsForgotPasswordModalOpen(true);
               }}
             >
               Forgot Password?
             </p>
           </form>
-          <button className="text-white p-3 bg-buttonColour">
-            <Link to="/register">Create New Account</Link>
-          </button>
+          <Link to="/register" onClick={() => setPassword("")}>
+            <button className="text-white p-2 bg-buttonColour text-[17px] px-4 hover:bg-hoverButtonColour">
+              Create New Account
+            </button>
+          </Link>
         </div>
       </div>
-      {isModalOpen && (
-        <div className="absolute inset-y-auto">
-          <img className="" src="/public/angry.jpg" alt="" />
-          <h1 className="text-4xl text-red-700 mt-[-60px] ml-12">
-            Ka password birserw hunxa!!!
-          </h1>
-        </div>
-      )}
-      {isLoginFailedModalOpen && (
-        <div className="absolute inset-y-auto bg-white rounded-xl shadow-2xl flex flex-col justify-between items-center p-10">
-          <IoIosCloseCircle
-            className="absolute top-0 right-0 text-3xl text-[#68C3D4] cursor-pointer"
-            onClick={() => setIsLoginFailedModalOpen(false)}
-          />
-          <h1 className="text-2xl p-5">Login Failed</h1>
-          <h1>Please enter the correct password or username</h1>
-        </div>
-      )}
+      <Toaster
+        position="top-right"
+        richColors
+        theme="light"
+        expand={true}
+        closeButton
+        pauseWhenPageIsHidden
+      />
+      {isForgotPasswordModalOpen && <ForgotPasswordModal />}
     </div>
   );
 }

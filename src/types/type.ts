@@ -1,3 +1,5 @@
+//  Type for logging in user mutation
+
 export type TLoginUserOutput = {
   statusCode: 200;
   data: {
@@ -28,6 +30,32 @@ export type TLoginUserInput = {
   username: string;
   password: string;
 };
+
+
+// Type for forgot password mutation
+
+export type TForgotPasswordInput = string;
+
+export type TForgotPasswordOutput = {
+  statusCode: 200;
+  data: object;
+  message: string;
+  success: boolean;
+};
+
+
+//  Type for reset password mutation
+
+export type TNewPasswordOutput = {
+  data: object;
+  message: string;
+  statusCode: 200;
+  success: boolean;
+};
+
+export type TNewPasswordInput = string;
+
+
 
 export type TRoleChangeOutput = {
   data:object;

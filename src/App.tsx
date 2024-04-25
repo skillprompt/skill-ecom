@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { LoginPage } from "./components/LoginPage";
 import { Navabar } from "./components/Navbar";
 import { Toaster } from "sonner";
+import { NewPasswordForm } from "./components/NewPasswordForm";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +14,12 @@ const router = createBrowserRouter([
     element: <Navabar />,
   },
   {
-    path: "/login",
+    path: "/login/",
     element: <LoginPage />,
+  },
+  {
+    path: "/login/reset/:resetToken",
+    element: <NewPasswordForm />,
   },
   {
     path: "/register",

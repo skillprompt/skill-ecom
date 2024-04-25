@@ -1,3 +1,4 @@
+
 // import { BsCart4 } from "react-icons/bs";
 // import { RiArrowDropDownLine } from "react-icons/ri";
 // import { CgProfile } from "react-icons/cg";
@@ -8,10 +9,13 @@
 import { Button, Dropdown, Navbar } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { Input } from "./input";
-import { IoIosSearch } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
-import { RiArrowDropDownLine } from "react-icons/ri";
+
+import logo from "../../public/logo.svg";
 import { BsCart4 } from "react-icons/bs";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
+
+
 
 export function Navabar() {
   return (
