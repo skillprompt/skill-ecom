@@ -62,22 +62,18 @@ export function LoginPage() {
   };
 
   return (
-    <div className="flex justify-around items-center h-screen w-full">
-      <div className="w-[50%] flex items-center justify-center">
+    <div className="flex flex-col items-center sm:h-screen w-full gap-10 sm:flex-row sm:py-56 sm:items-start md:h-[50%] ">
+      <div className="w-[50%] flex justify-center text-center">
         {/* Division for logo and slogan */}
-        <div className=" flex flex-col items-center justify-start h-[65vh]">
-          <img
-            className="w-[30%] mb-[-8%]"
-            src="/public/HaatBazaarLogo.svg"
-            alt="Logo Of Haat Bazaar"
-          />
-          <h1 className="text-[16px] text-center">Sajilo ra sasto vanekai</h1>
+        <div className="flex flex-col items-center pt-12 sm:pt-24 sm:p-20 gap-4">
+          <img className="sm:h-20" src="logo.png" alt="Logo Of Haat Bazaar" />
+          <h1 className="text-sm sm:text-base">Sajilo ra sasto vanekai</h1>
         </div>
       </div>
 
       {/* Form container */}
-      <div className="flex justify-center items-center text-center rounded-2xl w-[50%] h-full">
-        <div className="bg-white w-[441px] h-[503px] rounded-xl shadow-xl">
+      <div className="flex justify-center items-center w-full text-center rounded-2xl sm:w-[50%] sm:h-full">
+        <div className="bg-white w-[350px] h-[400px] rounded-xl shadow-md sm:shadow-xl sm:w-[444px] sm:h-[503px]">
           {/* Form */}
           <form
             className="w-full h-[80%] flex flex-col justify-center px-8"
@@ -86,11 +82,11 @@ export function LoginPage() {
               handleLoginUserSubmission();
             }}
           >
-            <h1 className="text-[18px]">Log into Haat Bazaar</h1>
+            <h1 className="text-base sm:text-lg">Log into Haat Bazaar</h1>
             {/* Input field */}
             <div>
               <input
-                className="p-2 my-5 border w-full"
+                className="p-1 mt-3 text-sm sm:p-2 sm:my-5 sm:text-base border w-full md:mb-0"
                 type="text"
                 placeholder="Username"
                 value={username}
@@ -104,7 +100,7 @@ export function LoginPage() {
             <div className="relative flex">
               {isPasswordVisible ? (
                 <input
-                  className="p-2 mb-5 border w-full"
+                  className="p-1 text-sm my-3 sm:p-2 sm:my-5 sm:text-base border w-full"
                   type="text"
                   placeholder="Password"
                   value={password}
@@ -116,7 +112,7 @@ export function LoginPage() {
                 />
               ) : (
                 <input
-                  className="p-2 mb-5 border w-full"
+                  className="p-1 my-3 text-sm sm:p-2 sm:my-5 sm:text-base border w-full"
                   type="password"
                   placeholder="Password"
                   value={password}
@@ -127,28 +123,27 @@ export function LoginPage() {
                   }}
                 />
               )}
-
               {isPasswordVisible ? (
                 <FaEye
-                  className="absolute right-2 top-3 cursor-pointer"
+                  className="absolute right-1 top-5 sm:right-2 sm:top-3 md:top-8 cursor-pointer opacity-[60%]"
                   onClick={() => {
                     setIsPasswordVisible(!isPasswordVisible);
                   }}
                 />
               ) : (
                 <FaEyeSlash
-                  className="absolute right-2 top-3 cursor-pointer"
+                  className="absolute right-1 top-5 sm:right-2 sm:top-3 md:top-8 cursor-pointer opacity-[60%]"
                   onClick={() => {
                     setIsPasswordVisible(!isPasswordVisible);
                   }}
                 />
               )}
             </div>
-            <button className="bg-buttonColour text-white p-2 mb-3 text-[17px] hover:bg-hoverButtonColour">
+            <button className="bg-buttonColour text-white p-1 mb-2 text-sm sm:p-2 sm:mb-3 sm:text-[17px] hover:bg-hoverButtonColour">
               Log in
             </button>
             <p
-              className="text-forgotPasswordColour cursor-pointer text-[14px] hover:underline"
+              className="text-forgotPasswordColour cursor-pointer text-xs sm:text-sm hover:underline"
               onClick={() => {
                 setIsForgotPasswordModalOpen(true);
               }}
@@ -157,7 +152,7 @@ export function LoginPage() {
             </p>
           </form>
           <Link to="/register" onClick={() => setPassword("")}>
-            <button className="text-white p-2 bg-buttonColour text-[17px] px-4 hover:bg-hoverButtonColour">
+            <button className="text-white p-1 sm:p-2 bg-buttonColour text-xs sm:text-[17px] sm:px-4 hover:bg-hoverButtonColour">
               Create New Account
             </button>
           </Link>
