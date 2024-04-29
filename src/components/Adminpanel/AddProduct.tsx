@@ -51,7 +51,7 @@ function AddProducts() {
                   htmlFor="Price"
                   className="block text-black font-semibold"
                 >
-                  Count in stock
+                  Count in stocks
                 </label>
                 <input
                   type="text"
