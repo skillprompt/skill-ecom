@@ -1,17 +1,39 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 import Register from "./components/Register";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { LoginPage } from "./components/LoginPage";
-import { Navabar } from "./components/Navbar";
+import { Navbar } from "./components/Navbar";
 import { Toaster } from "sonner";
 import { NewPasswordForm } from "./components/NewPasswordForm";
+import { CategoryBar } from "./components/CategoryBar";
+import { CarouselComponent } from "./components/CarouselComponent";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Navabar />,
+    element: (
+      <>
+        <Navbar />
+        <Outlet />
+      </>
+    ),
+    children: [
+      {
+        path: "/home",
+        element: (
+          <>
+            <CategoryBar />
+            <CarouselComponent />
+          </>
+        ),
+      },
+      {
+        path: "/contactUs",
+        element: <div>Contact us haii</div>,
+      },
+    ],
   },
   {
     path: "/login/",
