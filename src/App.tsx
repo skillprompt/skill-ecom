@@ -1,7 +1,7 @@
 import "./App.css";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Register from "./components/Register";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LoginPage } from "./components/LoginPage";
 import Adminpanel from "./components/Adminpanel/AdminPanel";
 import Dashboard from "./components/Adminpanel/Dashboard";
@@ -14,10 +14,6 @@ import { Navbar } from "./components/Navbar";
 import { Toaster } from "sonner";
 import { NewPasswordForm } from "./components/NewPasswordForm";
 import { HomePageContainer } from "./components/HomePageContainer";
-import { CategoryBar } from "./components/CategoryBar";
-import { Toaster } from "sonner";
-import { CarouselComponent } from "./components/CarouselComponent";
-import { NewPasswordForm } from "./components/NewPasswordForm";
 
 const router = createBrowserRouter([
   {
