@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+import flowbite from "flowbite-react/tailwind";
+=======
 // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
 const flowbite = require("flowbite-react/tailwind");
+>>>>>>> e54ac510815d9026d554c68b81b7ea7b5c6ad084
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -24,6 +28,10 @@ export default {
         categoryBarColour: "#2E2E2E",
       },
     },
+<<<<<<< HEAD
+    plugins: [flowbite.content()],
+=======
     plugins: [flowbite.plugin()],
+>>>>>>> e54ac510815d9026d554c68b81b7ea7b5c6ad084
   },
 };
