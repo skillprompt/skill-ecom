@@ -1,14 +1,12 @@
 import "./App.css";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-
 import Register from "./components/Register";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { LoginPage } from "./components/LoginPage";
 import { Navbar } from "./components/Navbar";
 import { Toaster } from "sonner";
 import { NewPasswordForm } from "./components/NewPasswordForm";
-import { CategoryBar } from "./components/CategoryBar";
-import { CarouselComponent } from "./components/CarouselComponent";
+import { HomePageContainer } from "./components/HomePageContainer";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/home",
-        element: (
-          <>
-            <CategoryBar />
-            <CarouselComponent />
-          </>
-        ),
+        element: <HomePageContainer />,
       },
       {
         path: "/contactUs",
