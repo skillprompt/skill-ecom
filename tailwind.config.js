@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import flowbite from "flowbite-react/tailwind";
+=======
+// eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
+const flowbite = require("flowbite-react/tailwind");
+>>>>>>> e54ac510815d9026d554c68b81b7ea7b5c6ad084
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,13 +12,26 @@ export default {
     extend: {
       colors: {
         btnColor: "#39844F",
+        btnTxtColor: "#ffffff",
+        inputColor: "#F0F5FF",
         inputTxt: "#aaaaaa",
+        catogriesBg: "#2E2E2E",
         hoverinputTxt: "#6C90C7",
         light_black: "#292626",
+        loginBtnColour: "#68C3D4",
+        createNewAccountBtnColour: "#39844F",
         buttonColour: "#39844F",
+        hoverButtonColour: "#41975b",
+        closeModalButtonColour: "#2098d5",
         forgotPasswordColour: "#6C90C7",
+        customNotificationColour: "#2f2f2f",
+        categoryBarColour: "#2E2E2E",
       },
     },
+<<<<<<< HEAD
     plugins: [flowbite.content()],
+=======
+    plugins: [flowbite.plugin()],
+>>>>>>> e54ac510815d9026d554c68b81b7ea7b5c6ad084
   },
 };

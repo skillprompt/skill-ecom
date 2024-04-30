@@ -1,35 +1,51 @@
-import { BsCart4 } from "react-icons/bs";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { CgProfile } from "react-icons/cg";
-import { IoIosSearch } from "react-icons/io";
+import { FaRegHeart } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
+import { FiUser } from "react-icons/fi";
+import { CiSearch } from "react-icons/ci";
+import { Link, useLocation } from "react-router-dom";
+import clsx from "clsx";
 
-function Navbar() {
+export function Navbar() {
+  const path = useLocation().pathname;
+
   return (
-    <div className="w-full h-[100px] bg-[#ffffff]">
-      <div className="max-w-[1110px]  h-full bg-[#ffffff] mx-auto flex justify-between px-4  text-sm font-regular items-center  ">
-        <img src="/logo.png" className="" alt="logo" />
-        <div className=" flex w-[580px] h-[50px] items-center relative">
-          <input
-            type="search"
-            placeholder="search for product"
-            className="w-[100%]  p-3 rounded-2xl border border-gray-300 "
-          />
-
-          <IoIosSearch className=" text-2xl align-text-top absolute right-2" />
+    <>
+      <div className="flex justify-center bg-white">
+        <div className="flex justify-between items-center w-[1200px] h-[95px]">
+          <img src="newLogo.png" alt="" className="w-[149px] h-[63px]" />
+          <div className="flex relative">
+            <CiSearch className="absolute w-6 h-[22px] left-3 top-4 opacity-[40%]" />
+            <input
+              type="search"
+              className="w-[559px] h-[56px] bg-[#F5F5F5] rounded-lg px-10"
+              placeholder="Search"
+            />
+          </div>
+          <div
+            className={clsx(
+              "text-base font-medium",
+              path === "/home" ? "opacity-[100%]" : "opacity-[30%]"
+            )}
+          >
+            <Link to="/home">Home</Link>
+          </div>
+          <div
+            className={clsx(
+              "text-base font-medium",
+              path === "/contactUs" ? "opacity-[100%]" : "opacity-[30%]"
+            )}
+          >
+            <Link to="/contactUs">Contact Us</Link>
+          </div>
+          <Link to="/wishlist">
+            <FaRegHeart className="w-6 h-[22px]" />
+          </Link>
+          <Link to="/cart">
+            <IoCartOutline className="w-7 h-7" />
+          </Link>
+          <FiUser className="w-6 h-7 cursor-pointer" />
         </div>
-
-        <div className="flex h-full justify-center items-center ml-[15px]">
-          <CgProfile className="w-[50px] h-[50px]" />
-          <h1 className="">hello(username)</h1>
-          <RiArrowDropDownLine />
-        </div>
-        <h1 className="ml-">choose a language</h1>
-        <RiArrowDropDownLine />
-
-        <BsCart4 className="text-3xl ml- " />
-        <p className="w-[29] h-[]27px">Cart </p>
       </div>
-    </div>
+    </>
   );
 }
-export default Navbar;

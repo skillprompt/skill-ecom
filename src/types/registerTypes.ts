@@ -28,3 +28,11 @@ export type TRegisterInput = {
   role: string;
   username: string;
 };
+
+export type TRegisterInputForm={
+  email: string;
+  password: string;
+  role: string;
+  username: string;
+  confirmPassword:string;
+}

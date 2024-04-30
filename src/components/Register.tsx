@@ -1,25 +1,79 @@
 import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { TRegisterInput, TRegisterOutput } from "../data/registerTypes";
-import { loginStore } from "../store/store";
+import {
+  TRegisterInput,
+  TRegisterInputForm,
+  TRegisterOutput,
+} from "../types/registerTypes";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { registerSchema } from "../validation/registervalidation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ClipLoader } from "react-spinners";
+
+// import { TRoleChangeInput, TRoleChangeOutput } from "../types/type";
+// import { mutationAssignRole } from "../data/AsignRole";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import { toast } from "sonner";
 
 const Register = () => {
-  // const [username, setUsername] = useState("");
-  // const [role, setRole] = useState("ADMIN");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [type, setType] = useState({
+    typePassword: "password",
+    typeConformPassword: "password",
+  });
 
-  const username = loginStore((state) => state.username);
-  const email = loginStore((state) => state.email);
-  const role = loginStore((state) => state.role);
-  const password = loginStore((state) => state.password);
+  const [showHiddenIcon, setShowHiddenIcon] = useState({
+    togglePassword: false,
+    toggleConfirmPassword: false,
+  });
 
-  const setUsername = loginStore((state) => state.setUsername);
-  const setEmail = loginStore((state) => state.setEmail);
-  const setRole = loginStore((state) => state.setRole);
-  const setPassword = loginStore((state) => state.setPassword);
+  // writing a conditon for toggleing a password
+  const handleTogglePassword = () => {
+    if (type.typePassword === "password") {
+      setType({ ...type, typePassword: "text" });
+      setShowHiddenIcon({ ...showHiddenIcon, togglePassword: true });
+    } else {
+      setType({ ...type, typePassword: "password" });
+      setShowHiddenIcon({ ...showHiddenIcon, togglePassword: false });
+    }
+  };
+
+  const handleToggleConfirmPassword = () => {
+    if (type.typeConformPassword === "password") {
+      setType({ ...type, typeConformPassword: "text" });
+      setShowHiddenIcon({ ...showHiddenIcon, toggleConfirmPassword: true });
+    } else {
+      setType({ ...type, typeConformPassword: "password" });
+      setShowHiddenIcon({ ...showHiddenIcon, toggleConfirmPassword: false });
+    }
+  };
+
+  // this is the function for notification in success data with use of sonner toast
+  const notifysuccess = () => {
+    toast.success("successfully  register your account");
+  };
+
+  // this is the function for notification in errors data with use of sonner toast
+  const notifyErrors = (data: TRegisterOutput) => {
+    toast.error(data.message);
+  };
+
+  // using react-hook-form to build a registerForm
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TRegisterInputForm>({
+    resolver: zodResolver(registerSchema),
+    mode: "onChange",
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      role: "",
+    },
+  });
 
   // using useNavigate to navigate to login URL when the data fetching is success
   const navigate = useNavigate();
@@ -45,15 +99,19 @@ const Register = () => {
       if (!response.ok) {
         const data = await response.json();
         console.log("data....", data);
+        notifyErrors(data);
         throw new Error("faild to get data");
       }
+
       const data = await response.json();
       return data;
     },
 
     onSuccess: (data) => {
       console.log(data, "data..............");
+
       navigate("/login");
+      notifysuccess();
     },
 
     onError: (error) => {
@@ -61,119 +119,142 @@ const Register = () => {
     },
   });
 
-  const handleSubmit = async () => {
+  // here calling a mutation function in a submit function
+  const handleRegisterSubmit: SubmitHandler<TRegisterInput> = async (data) => {
     await submitMutation.mutateAsync({
-      username,
-      role,
-      email,
-      password,
+      username: data.username,
+      role: data.role,
+      email: data.email,
+      password: data.password,
     });
-    console.log("Set loading to true");
   };
 
   return (
-    // this is the main container for register
-    <div className="flex justify-center items-center flex-col w-full h-screen  ">
-      {/* logo of e-commerce */}
-      <div className="mt-[-3%] mb-[-2%]">
-        {" "}
-        <img src="/logo.svg" alt="logo" className="w-[8rem]  " />
-      </div>
+    <>
+      {/* // this is the main container for register */}
+      <div className="flex justify-center items-center flex-col w-full py-9 ">
+        {/* logo of e-commerce */}
+        <div className="w-[100px] sm:w-[110px] pb-4">
+          <img src="/logo.png" alt="logo" className=" w-full" />
+        </div>
 
-      {/* card of register */}
-      <div className="w-[300px] h-[485px] sm:w-[380px] sm:h-[480px]  bg-[#FFFFFF] flex justify-center items-center  flex-col p-5 shadow-lg">
-        <h1 className="text-[18px] sm:text-[20px]">Create a new account</h1>
-        <p className="text-[10px] sm:text-[14px]">It's easy and quick</p>
+        {/* card of register */}
+        <div className="w-[300px] sm:w-[380px]   bg-[#FFFFFF] flex justify-center items-center  flex-col p-5 shadow-lg">
+          <h1 className="text-[18px] sm:text-[20px]">Create a new account</h1>
+          <p className="text-[10px] sm:text-[14px]">It's easy and quick</p>
+          {/* form for registration */}
+          <form
+            className="flex flex-col  gap-[20px] h-full w-full mt-8 mb-5"
+            onSubmit={handleSubmit(handleRegisterSubmit)}
+          >
+            {/* input for username */}
+            <input
+              type="text"
+              placeholder="Username"
+              required
+              {...register("username")}
+              className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+            />
+            {errors.username && (
+              <p className="text-red-500">{`${errors.username.message}`}</p>
+            )}
+            {/* input for role */}
 
-        {/* form for registration */}
-        <form
-          className="flex flex-col  gap-[20px] h-full w-full mt-8 mb-5"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setLoading(true);
-            handleSubmit();
-            setTimeout(() => {
-              setLoading(false);
-            }, 10000);
-          }}
-        >
-          {/* input for username */}
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            required
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
-          {/* input for role */}
-          <input
-            type="text"
-            placeholder="Role"
-            name="role"
-            value={role}
-            disabled
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            onChange={(e) => {
-              setRole(e.target.value);
-            }}
-          />
-          {/* input for email */}
-          <input
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            required
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          {/* input for password */}
-          <input
-            type="pasword"
-            placeholder="password"
-            name="password"
-            value={password}
-            className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
-            required
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          {/* input for conformation password */}
-          <input
-            type="pasword"
-            placeholder=" confirm password"
-            name="confirmPassowr"
-            className="p-2 border outline-slate-400 text-[14px] text-light_black"
-            required
-          />
-          {/* btn for sign up */}
-          {loading ? (
-            <button className=" py-2 bg-btnColor text-[14px] text-[#ffffff] hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
-              loading.....
+            <select
+              {...register("role")}
+              aria-placeholder="Role"
+              className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+              required
+            >
+              <option
+                value=""
+                disabled
+                selected
+                className="hidden text-inputTxt"
+              >
+                Roles
+              </option>
+              <option className="p-3">USER</option>
+              <option className="p-3">ADMIN</option>
+            </select>
+            {errors.role && (
+              <p className="text-red-500">{`${errors.role.message}`} </p>
+            )}
+            {/* input for email */}
+            <input
+              type="email"
+              placeholder="Email"
+              {...register("email")}
+              required
+              className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+            />
+            {errors.email && (
+              <p className="text-red-500">{`${errors.email.message}`} </p>
+            )}
+            {/* input for password */}
+            <div className="flex relative items-center">
+              <input
+                type={type.typePassword}
+                placeholder="Password"
+                {...register("password")}
+                className=" w-full p-2 border-2  outline-slate-400 text-[14px] text-light_black"
+                required
+              />
+              <div className="absolute right-2" onClick={handleTogglePassword}>
+                {showHiddenIcon.togglePassword ? <FaEye /> : <FaEyeSlash />}
+              </div>
+            </div>
+
+            {errors.password && (
+              <p className="text-red-500">{`${errors.password.message}`} </p>
+            )}
+            {/* input for conformation password */}
+            <div className="flex relative items-center">
+              <input
+                type={type.typeConformPassword}
+                placeholder=" Confirm password"
+                {...register("confirmPassword")}
+                className="w-full p-2 border outline-slate-400 text-[14px] text-light_black"
+                required
+              />
+              <div
+                className="absolute right-2"
+                onClick={handleToggleConfirmPassword}
+              >
+                {showHiddenIcon.toggleConfirmPassword ? (
+                  <FaEye />
+                ) : (
+                  <FaEyeSlash />
+                )}
+              </div>
+            </div>
+            {errors.confirmPassword && (
+              <p className="text-red-500">
+                {`${errors.confirmPassword.message}`}{" "}
+              </p>
+            )}
+            {/* btn for sign up */}
+
+            <button className=" py-2 bg-btnColor text-[14px] text-btnTxtColor hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
+              {submitMutation.isLoading ? (
+                <div className="flex w-full items-center justify-center gap-1">
+                  <ClipLoader color="#36d7b7" size={18} />
+                  <p>Loading....</p>
+                </div>
+              ) : (
+                "Signup"
+              )}
             </button>
-          ) : (
-            <button className=" py-2 bg-btnColor text-[14px] text-[#ffffff] hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
-              Sign Up
-            </button>
-          )}
-        </form>
-
-        {/* navigate to login page if the user has an account */}
-        <Link to="/login">
-          {" "}
-          <p className="text-inputTxt text-[12px] hover:text-hoverinputTxt hover:underline-offset-4 ">
-            Already have an account?
-          </p>
-        </Link>
+          </form>
+          {/* navigate to login page if the user has an account */}
+          <Link to="/login">
+            <p className="text-[#252525] text-[14px] hover:text-hoverinputTxt hover:underline-offset-4 transition duration-500">
+              Already have an account?
+            </p>
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
