@@ -1,5 +1,5 @@
 import { IoIosCloseCircle } from "react-icons/io";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { TForgotPasswordInput, TForgotPasswordOutput } from "../types/type";
 import { toast } from "sonner";
 import { useLoginStore } from "../store/loginStore";

@@ -1,5 +1,5 @@
 import { useLoginStore } from "../store/loginStore";
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useNavigate, useParams } from "react-router-dom";
 import { TNewPasswordInput, TNewPasswordOutput } from "../types/type";
