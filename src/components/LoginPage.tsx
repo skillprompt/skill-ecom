@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { TLoginUserInput, TLoginUserOutput } from "../types/type";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
