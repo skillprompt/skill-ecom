@@ -1,4 +1,4 @@
-export type TLoginUserOutput = {
+export type TRegisterOutput = {
   statusCode: 200;
   data: {
     user: {
@@ -17,14 +17,22 @@ export type TLoginUserOutput = {
       updatedAt: string;
       __v: number;
     };
-    accessToken: string;
-    refreshToken: string;
   };
   message: string;
   success: boolean;
 };
 
-export type TLoginUserInput = {
-  username: string,
-  password: string
+export type TRegisterInput = {
+  email: string;
+  password: string;
+  role: string;
+  username: string;
 };
+
+export type TRegisterInputForm={
+  email: string;
+  password: string;
+  role: string;
+  username: string;
+  confirmPassword:string;
+}

@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --pageBackgroundColor: #F1F2F4;
+ --bg-color:#F1F2F4;
+ --btnColor:#39844F;
 }
 
-* {
-  margin: 0;
+*{
+  margin:0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  background-color: var(--pageBackgroundColor);
+body{
+  background-color: var(--bg-color);
 }
