@@ -73,7 +73,7 @@ export function LoginPage() {
 
       {/* Form container */}
       <div className="flex justify-center items-center w-full text-center rounded-2xl sm:w-[50%] sm:h-full">
-        <div className="bg-white w-[350px] h-[400px] rounded-xl shadow-md sm:shadow-xl sm:w-[444px] sm:h-[503px]">
+        <div className="bg-white w-[350px] h-[400px] rounded-xl shadow-xl border sm:w-[444px] sm:h-[503px]">
           {/* Form */}
           <form
             className="w-full h-[80%] flex flex-col justify-center px-8"
