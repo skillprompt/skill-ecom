@@ -5,6 +5,17 @@ import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 
+import { DownOutlined } from "@ant-design/icons";
+import type { MenuProps } from "antd";
+import { Dropdown, Space } from "antd";
+
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: <Link to="/login">Login</Link>,
+  },
+];
+
 export function Navbar() {
   const path = useLocation().pathname;
 
@@ -43,7 +54,14 @@ export function Navbar() {
           <Link to="/cart">
             <IoCartOutline className="w-7 h-7" />
           </Link>
-          <FiUser className="w-6 h-7 cursor-pointer" />
+          <Dropdown menu={{ items }} overlayStyle={{ width: "100px" }}>
+            <a onClick={(e) => e.preventDefault()}>
+              <Space>
+                <FiUser className="w-6 h-7 cursor-pointer" />
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
         </div>
       </div>
     </>

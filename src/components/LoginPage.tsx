@@ -62,10 +62,10 @@ export function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center sm:h-screen w-full gap-10 sm:flex-row sm:py-56 sm:items-start md:h-[50%] ">
-      <div className="w-[50%] flex justify-center text-center">
+    <div className="flex flex-col items-center sm:h-screen w-full gap-10 sm:flex-row sm:py-56 sm:items-start h-[50%] ">
+      <div className="w-[50%] flex justify-center text-center items-center h-full">
         {/* Division for logo and slogan */}
-        <div className="flex flex-col items-center pt-12 sm:pt-24 sm:p-20 gap-4">
+        <div className="flex flex-col items-center gap-4">
           <img className="sm:h-20" src="logo.png" alt="Logo Of Haat Bazaar" />
           <h1 className="text-sm sm:text-base">Sajilo ra sasto vanekai</h1>
         </div>
