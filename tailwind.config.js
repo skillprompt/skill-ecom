@@ -21,6 +21,8 @@ export default {
         forgotPasswordColour: "#6C90C7",
         customNotificationColour: "#2f2f2f",
         categoryBarColour: "#2E2E2E",
+        buyNowButtonColour: "#000000",
+        hoverBuyNowButtonColour: "#111111",
       },
     },
     plugins: [flowbite.plugin()],

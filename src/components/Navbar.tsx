@@ -12,7 +12,7 @@ export function Navbar() {
     <>
       <div className="flex justify-center bg-white">
         <div className="flex justify-between items-center w-[1200px] h-[95px]">
-          <img src="newLogo.png" alt="" className="w-[149px] h-[63px]" />
+          <img src="newTestLogo.png" alt="Logo of haat Bazaar" />
           <div className="flex relative">
             <CiSearch className="absolute w-6 h-[22px] left-3 top-4 opacity-[40%]" />
             <input
