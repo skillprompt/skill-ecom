@@ -24,10 +24,10 @@ export function Navbar() {
           <div
             className={clsx(
               "text-base font-medium",
-              path === "/home" ? "opacity-[100%]" : "opacity-[30%]"
+              path === "/" ? "opacity-[100%]" : "opacity-[30%]"
             )}
           >
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
           </div>
           <div
             className={clsx(
