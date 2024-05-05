@@ -61,8 +61,8 @@ export function ForgotPasswordModal() {
   };
 
   return (
-    <div className="h-full w-full absolute inset-y-auto flex items-center justify-center bg-[#F1F2F4] opacity-[95%]">
-      <div className="bg-white w-[25%] h-[45%] rounded-xl shadow-xl absolute flex items-center">
+    <div className="h-screen w-screen absolute inset-y-auto flex items-center justify-center bg-[#F1F2F4] opacity-[95%]">
+      <div className="bg-white w-[25%] h-[42%] rounded-xl shadow-xl absolute flex items-center">
         <IoIosCloseCircle
           className="absolute top-0 right-0 text-3xl text-closeModalButtonColour cursor-pointer"
           onClick={() => {
@@ -71,28 +71,30 @@ export function ForgotPasswordModal() {
           }}
         />
         <form
-          className="w-full flex flex-col items-center justify-between px-8 h-[40%]"
+          className="w-full flex flex-col items-center justify-center gap-16 px-8 h-[40%]"
           onSubmit={(event) => {
             event.preventDefault();
             setIsSubmitting(true);
             handleForgotPasswordSubmission();
           }}
         >
-          <h1>Enter your email</h1>
-          <input
-            className="p-2 border w-full"
-            type="email"
-            placeholder="Email"
-            value={forgotPasswordEmail}
-            maxLength={30}
-            required
-            onChange={(event) => {
-              setForgotPasswordEmail(event.target.value);
-            }}
-          />
-          <button className="bg-buttonColour text-white p-2 w-full hover:bg-hoverButtonColour transition ease-in-out delay-200">
-            {isSubmitting ? "Submitting..." : "Submit"}
-          </button>
+          <h1 className="text-2xl">Enter your email</h1>
+          <div className="w-full flex flex-col gap-6">
+            <input
+              className="p-2 border w-full"
+              type="email"
+              placeholder="Email*"
+              value={forgotPasswordEmail}
+              maxLength={30}
+              required
+              onChange={(event) => {
+                setForgotPasswordEmail(event.target.value);
+              }}
+            />
+            <button className="bg-buttonColour text-white p-2 w-full hover:bg-hoverButtonColour transition ease-in-out delay-200">
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </button>
+          </div>
         </form>
       </div>
     </div>

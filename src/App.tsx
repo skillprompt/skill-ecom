@@ -27,17 +27,25 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <HomePageContainer />,
       },
       {
         path: "/contactUs",
         element: <ContractUsForm />,
       },
+      {
+        path: "/wishlist",
+        element: <div>This is the wishlist page</div>,
+      },
+      {
+        path: "/cart",
+        element: <div>This is the cart page</div>,
+      },
     ],
   },
   {
-    path: "/login/",
+    path: "/login",
     element: <LoginPage />,
   },
   {
@@ -47,10 +55,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
-  },
-  {
-    path: "login",
-    element: <LoginPage />,
   },
   {
     path: "/admin",
@@ -93,7 +97,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <>
-      <Toaster richColors position="top-right" />
+      <Toaster richColors closeButton position="top-right" />
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>
