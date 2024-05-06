@@ -9,7 +9,10 @@ import { Toaster } from "sonner";
 import { NewPasswordForm } from "./components/NewPasswordForm";
 import { CategoryBar } from "./components/CategoryBar";
 import { CarouselComponent } from "./components/CarouselComponent";
-
+import { FooterComponent } from "./components/Footer";
+import Card from "./components/Card";
+import Banner from "./components/Banner";
+// import Detail from "./components/Detail";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +20,7 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <Outlet />
+        <FooterComponent />
       </>
     ),
     children: [
@@ -26,6 +30,9 @@ const router = createBrowserRouter([
           <>
             <CategoryBar />
             <CarouselComponent />
+            <Card />
+            <Banner />
+            {/* <Detail /> */}
           </>
         ),
       },
