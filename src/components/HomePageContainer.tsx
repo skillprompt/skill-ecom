@@ -1,3 +1,5 @@
+import Banner from "./Banner";
+import Card from "./Card";
 import { CarouselComponent } from "./CarouselComponent";
 import { CategoryBar } from "./CategoryBar";
 import { CategoryCard } from "./CategoryCard";
@@ -10,6 +12,8 @@ export function HomePageContainer() {
       <CarouselComponent />
       <CategoryCard />
       <ProductCards />
+      <Card />
+      <Banner />
     </>
   );
 }
