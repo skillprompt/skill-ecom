@@ -66,7 +66,9 @@ export function LoginPage() {
       <div className="w-[50%] flex justify-center text-center items-center h-full">
         {/* Division for logo and slogan */}
         <div className="flex flex-col items-center gap-4">
-          <img className="sm:h-20" src="logo.png" alt="Logo Of Haat Bazaar" />
+          <Link to="/">
+            <img className="sm:h-20" src="logo.png" alt="Logo Of Haat Bazaar" />
+          </Link>
           <h1 className="text-sm sm:text-base">Sajilo ra sasto vanekai</h1>
         </div>
       </div>
