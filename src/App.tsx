@@ -13,7 +13,10 @@ import Users from "./components/Adminpanel/Users";
 import { Navbar } from "./components/Navbar";
 import { Toaster } from "sonner";
 import { NewPasswordForm } from "./components/NewPasswordForm";
+import { FooterComponent } from "./components/Footer";
+// import Detail from "./components/Detail";
 import { HomePageContainer } from "./components/HomePageContainer";
+import { ContractUsForm } from "./components/ContractUsForm";
 
 const router = createBrowserRouter([
   {
@@ -22,21 +25,30 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <Outlet />
+        <FooterComponent />
       </>
     ),
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <HomePageContainer />,
       },
       {
         path: "/contactUs",
-        element: <div>Contact us haii</div>,
+        element: <ContractUsForm />,
+      },
+      {
+        path: "/wishlist",
+        element: <div>This is the wishlist page</div>,
+      },
+      {
+        path: "/cart",
+        element: <div>This is the cart page</div>,
       },
     ],
   },
   {
-    path: "/login/",
+    path: "/login",
     element: <LoginPage />,
   },
   {
@@ -46,10 +58,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
-  },
-  {
-    path: "login",
-    element: <LoginPage />,
   },
   {
     path: "/admin",
@@ -92,7 +100,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <>
-      <Toaster richColors position="top-right" />
+      <Toaster richColors closeButton position="top-right" />
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>

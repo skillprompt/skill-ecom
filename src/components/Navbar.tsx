@@ -25,6 +25,7 @@ export function Navbar() {
 
   return (
     <>
+
       <div className=" bg-white">
         <div className="max-w-[1200px] mx-auto h-full flex justify-between items-center gap-10 p-3  ">
           <img
@@ -34,12 +35,14 @@ export function Navbar() {
           />
           <div className=" relative w-full self-center   ">
             <CiSearch className="absolute w-4 h-5 md:w-6 md:h-[22px] left-3 top-3 opacity-[40%]" />
+
             <input
               type="search"
               className="w-full  p-2 md:p-3 bg-inputColor rounded-lg pl-8 md:pl-10 text-sm md:text-base"
               placeholder="Search"
             />
           </div>
+
           <div className="hidden sm:flex gap-9  items-center justify-between w-full ">
             <div
               className={clsx(
@@ -77,6 +80,7 @@ export function Navbar() {
                 </Link>
               </DropdownMenuContent>
             </DropdownMenu>
+
           </div>
           <div>
             <DropdownMenu>

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export const darkMode = ["class"];
 export const content = [
   './pages/**/*.{ts,tsx}',
@@ -62,6 +63,7 @@ export const theme = {
       popover: {
         DEFAULT: "hsl(var(--popover))",
         foreground: "hsl(var(--popover-foreground))",
+
       },
       card: {
         DEFAULT: "hsl(var(--card))",
