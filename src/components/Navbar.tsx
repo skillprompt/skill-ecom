@@ -18,43 +18,43 @@ import { MenuStore } from "@/store/loginStore";
 import { NavbarModal } from "./NavbarModal";
 
 export function Navbar() {
-  const path = useLocation().pathname;
+  const location = useLocation();
+  const path = location.pathname;
 
   const Menubar = MenuStore((state) => state.Menubar);
   const setMenubar = MenuStore((state) => state.setMenubar);
 
   return (
     <>
-
-      <div className=" bg-white">
-        <div className="max-w-[1200px] mx-auto h-full flex justify-between items-center gap-10 p-3  ">
+      <div className="bg-white">
+        <div className="max-w-[1200px] mx-auto h-full flex justify-between items-center gap-10 p-3">
           <img
-            src="newLogo.png"
-            alt=""
-            className=" w-24 md:w-[130px] h-8 md:h-[50px]"
+            src="newTestLogo.png"
+            alt="logo of haat bazaar"
+            className="w-24 md:w-[140px] h-8"
           />
-          <div className=" relative w-full self-center   ">
+          <div className="relative w-full self-center">
             <CiSearch className="absolute w-4 h-5 md:w-6 md:h-[22px] left-3 top-3 opacity-[40%]" />
 
             <input
               type="search"
-              className="w-full  p-2 md:p-3 bg-inputColor rounded-lg pl-8 md:pl-10 text-sm md:text-base"
+              className="w-full p-2 md:p-3 bg-inputColor rounded-lg pl-8 md:pl-10 text-sm md:text-base"
               placeholder="Search"
             />
           </div>
 
-          <div className="hidden sm:flex gap-9  items-center justify-between w-full ">
+          <div className="hidden sm:flex gap-9 items-center justify-between w-full">
             <div
               className={clsx(
                 "text-base font-medium",
-                path === "/home" ? "opacity-[100%]" : "opacity-[30%]"
+                path === "/" ? "opacity-[100%]" : "opacity-[30%]"
               )}
             >
-              <Link to="/home">Home</Link>
+              <Link to="/">Home</Link>
             </div>
             <div
               className={clsx(
-                "text-base font-medium ",
+                "text-base font-medium",
                 path === "/contactUs" ? "opacity-[100%]" : "opacity-[30%]"
               )}
             >
@@ -73,14 +73,13 @@ export function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="shadow-lg bg-white">
                 <Link to="/login">
-                  <DropdownMenuLabel className="hover:bg-[#808080]  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black p-2 ">
+                  <DropdownMenuLabel className="hover:bg-[#808080]  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black p-2">
                     <MdOutlineLogin size={16} />
                     <span>Login</span>
                   </DropdownMenuLabel>
                 </Link>
               </DropdownMenuContent>
             </DropdownMenu>
-
           </div>
           <div>
             <DropdownMenu>
@@ -89,7 +88,7 @@ export function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="shadow-sm bg-white">
                 <Link to="/login">
-                  <DropdownMenuLabel className="hover:bg-btnColor  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black  ">
+                  <DropdownMenuLabel className="hover:bg-btnColor  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black">
                     <MdOutlineLogin size={16} />
                     <span>Login</span>
                   </DropdownMenuLabel>
@@ -109,7 +108,7 @@ export function Navbar() {
           ) : (
             <RxHamburgerMenu
               size={50}
-              className="block sm:hidden text-bold "
+              className="block sm:hidden text-bold"
               onClick={() => {
                 setMenubar(true);
               }}

@@ -22,7 +22,6 @@ export function ProductCards() {
                 <button className="px-16 py-3 bg-buyNowButtonColour hover:bg-hoverBuyNowButtonColour text-white rounded-lg">
                   Buy Now
                 </button>
-               
               </div>
             );
           })}

@@ -1,11 +1,11 @@
 export function ContractUsForm() {
   return (
-    <div className="h-[90vh] flex justify-center items-center bg-[#EDEDED]">
-      <div className="bg-white h-[85%] w-[30%] flex flex-col gap-6 justify-between items-center p-10 rounded-lg">
+    <div className="h-screen flex justify-center items-center bg-[#EDEDED]">
+      <div className="bg-white h-[70%] w-[30%] flex flex-col items-center p-10 rounded-xl shadow-xl gap-8">
         <div>
           <h1 className="text-3xl font-medium">Contact Us</h1>
         </div>
-        <form className="h-full w-full flex flex-col justify-center gap-4">
+        <form className="h-[80%] w-full flex flex-col justify-center gap-4">
           <div className="flex justify-between gap-4">
             <input
               className="p-2 w-full border rounded"
