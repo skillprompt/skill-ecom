@@ -9,11 +9,10 @@ import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 
 const Sidebar = () => {
-  const location = useLocation();
-  const path = location.pathname;
+  const path = useLocation().pathname;
   return (
-    <div>
-      <div className=" justify-center  bg-[#2D3047]  w-64 text-white h-screen ">
+    <div className="">
+      <div className=" justify-center  bg-[#2D3047]  w-64 text-white h-full ">
         <div className="flex justify-center pb-5">
           <div className=" bg-[#374151]  flex w-[80%]  top-0  mt-10 pt-4 pb-4 pl-4 justify-center gap-2 ">
             <FaUserCog className="text-5xl" />
