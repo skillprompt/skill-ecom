@@ -2,10 +2,10 @@
 
 export const darkMode = ["class"];
 export const content = [
-  './pages/**/*.{ts,tsx}',
-  './components/**/*.{ts,tsx}',
-  './app/**/*.{ts,tsx}',
-  './src/**/*.{ts,tsx}',
+  "./pages/**/*.{ts,tsx}",
+  "./components/**/*.{ts,tsx}",
+  "./app/**/*.{ts,tsx}",
+  "./src/**/*.{ts,tsx}",
 ];
 export const prefix = "";
 export const theme = {
@@ -31,10 +31,10 @@ export const theme = {
       hoverButtonColour: "#41975b",
       closeModalButtonColour: "#2098d5",
       forgotPasswordColour: "#6C90C7",
-      customNotificationColour: "#2f2f2f",
       categoryBarColour: "#2E2E2E",
       buyNowButtonColour: "#000000",
       hoverBuyNowButtonColour: "#111111",
+      lessFocusTextColour: "#545454",
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",
@@ -63,7 +63,6 @@ export const theme = {
       popover: {
         DEFAULT: "hsl(var(--popover))",
         foreground: "hsl(var(--popover-foreground))",
-
       },
       card: {
         DEFAULT: "hsl(var(--card))",
