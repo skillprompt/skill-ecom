@@ -3,6 +3,7 @@ import Card from "./Card";
 import { CarouselComponent } from "./CarouselComponent";
 import { CategoryBar } from "./CategoryBar";
 import { CategoryCard } from "./CategoryCard";
+
 import { ProductCards } from "./ProductCards";
 
 export function HomePageContainer() {
@@ -12,8 +13,10 @@ export function HomePageContainer() {
       <CarouselComponent />
       <CategoryCard />
       <ProductCards />
-      <Card />
+
       <Banner />
+
+      <Card />
     </>
   );
 }
