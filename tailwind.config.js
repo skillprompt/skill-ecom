@@ -1,3 +1,5 @@
+import flowbite from "flowbite-react/tailwind";
+
 /** @type {import('tailwindcss').Config} */
 
 export const darkMode = ["class"];
@@ -69,6 +71,7 @@ export const theme = {
         foreground: "hsl(var(--card-foreground))",
       },
     },
+    plugins: [flowbite.plugin()],
     borderRadius: {
       lg: "var(--radius)",
       md: "calc(var(--radius) - 2px)",
