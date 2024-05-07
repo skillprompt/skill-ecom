@@ -16,6 +16,8 @@ import { NewPasswordForm } from "./components/NewPasswordForm";
 import { FooterComponent } from "./components/Footer";
 import { HomePageContainer } from "./components/HomePageContainer";
 import { ContractUsForm } from "./components/ContractUsForm";
+import CheckoutPage from "./components/CheckoutPage";
+import { CategoryBar } from "./components/CategoryBar";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
+        <CategoryBar />
         <Outlet />
         <FooterComponent />
       </>
@@ -42,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <div>This is the cart page</div>,
+        element: <CheckoutPage />,
       },
     ],
   },

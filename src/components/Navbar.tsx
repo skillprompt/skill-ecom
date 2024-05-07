@@ -40,6 +40,7 @@ export function Navbar() {
               type="search"
               className="w-full p-2 md:p-3 bg-inputColor rounded-lg pl-8 md:pl-10 text-sm md:text-base"
               placeholder="Search"
+              id="search"
             />
           </div>
 
