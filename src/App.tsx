@@ -17,6 +17,7 @@ import { FooterComponent } from "./components/Footer";
 // import Detail from "./components/Detail";
 import { HomePageContainer } from "./components/HomePageContainer";
 import { ContractUsForm } from "./components/ContractUsForm";
+import Detail from "./components/Detail";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />,
   },
+  { path: "/details", element: <Detail /> },
   {
     path: "/admin",
     element: (
