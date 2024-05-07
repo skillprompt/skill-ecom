@@ -1,8 +1,7 @@
 import "./App.css";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-
 import Register from "./components/Register";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LoginPage } from "./components/LoginPage";
 import Adminpanel from "./components/Adminpanel/AdminPanel";
 import Dashboard from "./components/Adminpanel/Dashboard";
@@ -14,8 +13,9 @@ import Users from "./components/Adminpanel/Users";
 import { Navbar } from "./components/Navbar";
 import { Toaster } from "sonner";
 import { NewPasswordForm } from "./components/NewPasswordForm";
-import { CategoryBar } from "./components/CategoryBar";
-import { CarouselComponent } from "./components/CarouselComponent";
+import { FooterComponent } from "./components/Footer";
+import { HomePageContainer } from "./components/HomePageContainer";
+import { ContractUsForm } from "./components/ContractUsForm";
 
 const router = createBrowserRouter([
   {
@@ -24,26 +24,30 @@ const router = createBrowserRouter([
       <>
         <Navbar />
         <Outlet />
+        <FooterComponent />
       </>
     ),
     children: [
       {
-        path: "/home",
-        element: (
-          <>
-            <CategoryBar />
-            <CarouselComponent />
-          </>
-        ),
+        path: "/",
+        element: <HomePageContainer />,
       },
       {
         path: "/contactUs",
-        element: <div>Contact us haii</div>,
+        element: <ContractUsForm />,
+      },
+      {
+        path: "/wishlist",
+        element: <div>This is the wishlist page</div>,
+      },
+      {
+        path: "/cart",
+        element: <div>This is the cart page</div>,
       },
     ],
   },
   {
-    path: "/login/",
+    path: "/login",
     element: <LoginPage />,
   },
   {
@@ -99,9 +103,9 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <>
-      <Toaster richColors position="top-right" />
+      <Toaster richColors closeButton position="top-right" />
       <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </QueryClientProvider>
     </>
   );

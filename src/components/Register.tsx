@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import {
   TRegisterInput,
@@ -236,7 +236,7 @@ const Register = () => {
             {/* btn for sign up */}
 
             <button className=" py-2 bg-btnColor text-[14px] text-btnTxtColor hover:bg-[#4cab58] transition ease-in-out duration-[0.7s] ">
-              {submitMutation.isLoading ? (
+              {submitMutation.isPending ? (
                 <div className="flex w-full items-center justify-center gap-1">
                   <ClipLoader color="#36d7b7" size={18} />
                   <p>Loading....</p>
