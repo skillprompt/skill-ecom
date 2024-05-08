@@ -39,9 +39,9 @@ export function Navbar() {
       <div className=" bg-white">
         <div className="max-w-[1200px] mx-auto h-full flex justify-between items-center gap-10 p-3  ">
           <img
-            src="newLogo.png"
-            alt=""
-            className=" w-24 md:w-[130px] h-8 md:h-[50px]"
+            src="newTestLogo.png"
+            alt="logo of haat bazaar"
+            className="w-24 md:w-[140px] h-8"
           />
           <div className=" relative w-full self-center   ">
             <form className="max-w-md mx-auto">
@@ -74,7 +74,7 @@ export function Navbar() {
             </form>
           </div>
 
-          <div className="hidden sm:flex gap-9  items-center justify-between w-full ">
+          <div className="hidden sm:flex gap-9 items-center justify-between w-full">
             <div
               className={clsx(
                 "text-base font-medium",
@@ -85,7 +85,7 @@ export function Navbar() {
             </div>
             <div
               className={clsx(
-                "text-base font-medium ",
+                "text-base font-medium",
                 path === "/contactUs" ? "opacity-[100%]" : "opacity-[30%]"
               )}
             >
@@ -138,7 +138,7 @@ export function Navbar() {
           ) : (
             <RxHamburgerMenu
               size={50}
-              className="block sm:hidden text-bold "
+              className="block sm:hidden text-bold"
               onClick={() => {
                 setMenubar(true);
               }}

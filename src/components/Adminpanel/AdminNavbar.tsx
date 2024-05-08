@@ -3,8 +3,8 @@ import { FaUserCircle } from "react-icons/fa";
 
 function AdminNavbar() {
   return (
-    <div className="flex justify-between items-center h-[100px] w-full bg-[#ffffff] ">
-      <div className="  bg-[#ffffff] px-10 ">
+    <div className="flex justify-between  px-16 items-center h-[100px] w-full bg-[#ffffff] ">
+      <div className="  bg-[#ffffff]  ">
         <img src="/logo.png" alt="error" />
       </div>
       <div className="flex relative">
@@ -15,9 +15,9 @@ function AdminNavbar() {
         />
         <IoIosSearch className=" text-[30px] absolute right-3 pt-2 " />
       </div>
-      <div className="flex pr-28 gap-1 font-semibold">
-        <FaUserCircle className="text-[25px]  " />
-        Admin
+      <div className="flex  gap-2 font-semibold">
+        <FaUserCircle className="text-[40px]  " />
+        <p className="flex items-center">Admin</p>
       </div>
     </div>
   );

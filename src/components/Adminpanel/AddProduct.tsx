@@ -3,23 +3,23 @@ import { FaChevronDown } from "react-icons/fa";
 function AddProducts() {
   return (
     <>
-      <div className="px-10 w-full flex flex-col gap-5  ">
+      <div className="px-16 w-full  flex flex-col gap-5  ">
         <div className="flex justify-between  pt-14  ">
-          <div className="bg-green-700 font-bold text-white p-2 px-6 ">
+          <div className="bg-btnColor rounded-lg font-bold text-btnTxtColor p-2 px-6 ">
             Go to Product
           </div>
-          <div className="font-bold text-2xl">Add Products</div>
-          <div className="bg-green-700 font-bold text-white p-2 px-6 ">
+          <div className="font-bold  text-2xl">Add Products</div>
+          <div className="bg-btnColor rounded-lg font-bold text-btnTxtColor p-2 px-6 ">
             Publish now
           </div>
         </div>
         <div className="w-full">
-          <div className="  bg-white p-5   rounded-lg shadow-lg">
+          <div className="  bg-btnTxtColor p-5   rounded-lg shadow-lg">
             <form>
               <div className="mb-2  ">
                 <label
                   htmlFor="Product title"
-                  className=" text-black font-semibold"
+                  className=" text-catogriesBg font-semibold"
                 >
                   Product Title
                 </label>
@@ -34,7 +34,7 @@ function AddProducts() {
               <div className="mb-2">
                 <label
                   htmlFor="Price"
-                  className="block text-black font-semibold"
+                  className="block text-catogriesBg font-semibold"
                 >
                   Price
                 </label>
@@ -49,7 +49,7 @@ function AddProducts() {
               <div className="mb-2">
                 <label
                   htmlFor="Price"
-                  className="block text-black font-semibold"
+                  className="block text-catogriesBg font-semibold"
                 >
                   Count in stocks
                 </label>
@@ -64,7 +64,7 @@ function AddProducts() {
               <div className="mb-2">
                 <label
                   htmlFor="Description"
-                  className="block text-black font-semibold"
+                  className="block text-catogriesBg font-semibold"
                 >
                   Description
                 </label>
@@ -78,7 +78,7 @@ function AddProducts() {
               <div className="mb-2">
                 <label
                   htmlFor="image"
-                  className="block text-black font-semibold"
+                  className="block text-catogriesBg font-semibold"
                 >
                   Image
                 </label>
@@ -88,6 +88,7 @@ function AddProducts() {
                     id="pngFile"
                     name="pngFile"
                     accept=".png"
+                    
                     placeholder="Enter image URL"
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                   />

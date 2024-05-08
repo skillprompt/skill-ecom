@@ -1,35 +1,64 @@
-import { CiCamera, CiHeadphones, CiMobile1 } from "react-icons/ci";
-import { MdComputer, MdOutlineToys } from "react-icons/md";
-import { SiYoutubegaming } from "react-icons/si";
+import CameraIcon from "@/icons/Camera";
+import ComputerIcon from "@/icons/Computer";
+import GamingIcon from "@/icons/Gaming";
+import HeadPhonesIcon from "@/icons/HeadPhones";
+import PhoneIcon from "@/icons/Phone";
+import SmartWatchIcon from "@/icons/SmartWatch";
 
 export function CategoryBar() {
+  type TCategory = {
+    _id: number;
+    icon: React.ReactNode;
+    name: string;
+  };
+
+  const Categories: TCategory[] = [
+    {
+      _id: 0,
+      icon: <PhoneIcon />,
+      name: "Phones",
+    },
+    {
+      _id: 1,
+      icon: <ComputerIcon />,
+      name: "Computers",
+    },
+    {
+      _id: 2,
+      icon: <SmartWatchIcon />,
+      name: "Smart Watches",
+    },
+    {
+      _id: 3,
+      icon: <CameraIcon />,
+      name: "Cameras",
+    },
+    {
+      _id: 4,
+      icon: <HeadPhonesIcon />,
+      name: "HeadPhones",
+    },
+    {
+      _id: 5,
+      icon: <GamingIcon />,
+      name: "Gaming",
+    },
+  ];
+
   return (
     <div className="flex justify-center bg-categoryBarColour">
-      <div className="h-12 flex justify-between w-[1350px] items-center text-gray-300">
-        <div className="flex w-full gap-1 items-center justify-center border-r">
-          <CiMobile1 className="h-7 w-7" />
-          <div>Phones</div>
-        </div>
-        <div className="flex w-full gap-1 items-center justify-center border-r">
-          <MdComputer className="h-7 w-7" />
-          <div>Computers</div>
-        </div>
-        <div className="flex w-full gap-1 items-center justify-center border-r">
-          <MdOutlineToys className="h-7 w-7" />
-          <div>Toys</div>
-        </div>
-        <div className="flex w-full gap-1 items-center justify-center border-r">
-          <CiCamera className="h-7 w-8" />
-          <div>Cameras</div>
-        </div>
-        <div className="flex w-full gap-1 items-center justify-center border-r">
-          <CiHeadphones className="h-7 w-7" />
-          <div>Headphones</div>
-        </div>
-        <div className="flex w-full gap-1 items-center justify-center">
-          <SiYoutubegaming className="h-7 w-7" />
-          <div>Gaming</div>
-        </div>
+      <div className="h-12 flex justify-center w-[1120px] items-center text-gray-300">
+        {Categories.map((category) => {
+          return (
+            <div
+              className="flex w-full gap-3 items-center justify-center border-x"
+              key={category._id}
+            >
+              {category.icon}
+              <p>{category.name}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

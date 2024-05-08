@@ -3,7 +3,7 @@ import { categories } from "../data/Categories";
 
 export function CategoryCard() {
   return (
-    <div className="h-[352px] flex justify-center items-center bg-[#FAFAFA] overflow-auto">
+    <div className="h-[352px] flex justify-center items-center bg-categoryCardContainerColour">
       <div className="w-[1120px] h-[192px] flex flex-col gap-8">
         <div className="flex justify-between">
           <p className="text-2xl font-medium">Browse By Category</p>
@@ -16,7 +16,7 @@ export function CategoryCard() {
           {categories.map((category) => {
             return (
               <div
-                className="bg-[#EDEDED] h-32 w-40 rounded-2xl flex flex-col justify-center items-center gap-2 cursor-pointer"
+                className="bg-categoryCardColour h-32 w-40 rounded-[15px] flex flex-col justify-center items-center gap-2 cursor-pointer hover:shadow hover:border ease-in-out duration-300 active:bg-categoryCardActiveColour active:duration-300"
                 key={category.id}
               >
                 <div className="text-4xl">{category.element}</div>
