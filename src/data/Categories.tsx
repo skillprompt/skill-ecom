@@ -1,38 +1,40 @@
-import { MdComputer } from "react-icons/md";
-import { SiYoutubegaming } from "react-icons/si";
-import { TbDeviceWatch } from "react-icons/tb";
-import { CiCamera, CiHeadphones, CiMobile4 } from "react-icons/ci";
 import { TCategories } from "../types/categoriesType";
+import DarkPhoneIcon from "@/icons/category-card-icons/DarkPhone";
+import DarkSmartWatchIcon from "@/icons/category-card-icons/DarkSmartWatch";
+import DarkCameraIcon from "@/icons/category-card-icons/DarkCamera";
+import DarkHeadPhonesIcon from "@/icons/category-card-icons/DarkHeadPhones";
+import DarkComputerIcon from "@/icons/category-card-icons/DarkComputer";
+import DarkGamingIcon from "@/icons/category-card-icons/DarkGaming";
 
 export const categories: TCategories[] = [
   {
     id: 0,
     title: "Phones",
-    element: <CiMobile4 />,
+    element: <DarkPhoneIcon />,
   },
   {
     id: 1,
     title: "Smart Watches",
-    element: <TbDeviceWatch />,
+    element: <DarkSmartWatchIcon />,
   },
   {
     id: 2,
     title: "Cameras",
-    element: <CiCamera />,
+    element: <DarkCameraIcon />,
   },
   {
     id: 3,
     title: "Headphones",
-    element: <CiHeadphones />,
+    element: <DarkHeadPhonesIcon />,
   },
   {
     id: 4,
     title: "Computers",
-    element: <MdComputer />,
+    element: <DarkComputerIcon />,
   },
   {
     id: 5,
     title: "Gaming",
-    element: <SiYoutubegaming />,
+    element: <DarkGamingIcon />,
   },
 ];

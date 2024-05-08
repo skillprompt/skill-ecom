@@ -27,7 +27,7 @@ export function Navbar() {
   return (
     <>
       <div className="bg-white">
-        <div className="max-w-[1200px] mx-auto h-full flex justify-between items-center gap-10 p-3">
+        <div className="max-w-[1120px] mx-auto h-full flex justify-between items-center gap-10 p-3">
           <img
             src="newTestLogo.png"
             alt="logo of haat bazaar"
@@ -38,8 +38,9 @@ export function Navbar() {
 
             <input
               type="search"
-              className="w-full p-2 md:p-3 bg-inputColor rounded-lg pl-8 md:pl-10 text-sm md:text-base"
+              className="w-full p-2 md:p-3 bg-inputColor rounded-[8px] pl-8 md:pl-10 text-sm md:text-base"
               placeholder="Search"
+              id="search"
             />
           </div>
 

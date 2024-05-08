@@ -10,7 +10,7 @@ export function ProductCards() {
           {products.map((product) => {
             return (
               <div
-                className="h-[432px] w-[268px] bg-[#F6F6F6] rounded-[9px] relative flex flex-col justify-center items-center text-center gap-4 pt-12 px-1"
+                className="h-[432px] w-[268px] bg-productCardColour rounded-[9px] relative flex flex-col justify-center items-center text-center gap-4 pt-12 px-1 hover:shadow-xl hover:ease-in-out duration-300"
                 key={product.id}
               >
                 <div className="flex flex-col items-center justify-between h-[70%]">
@@ -19,7 +19,7 @@ export function ProductCards() {
                   <p className="font-medium text-base p-2">{product.title}</p>
                   <p className="font-semibold text-2xl">{product.price}</p>
                 </div>
-                <button className="px-16 py-3 bg-buyNowButtonColour hover:bg-hoverBuyNowButtonColour text-white rounded-lg">
+                <button className="px-16 py-3 bg-buyNowButtonColour hover:bg-hoverBuyNowButtonColour text-white rounded-[8px] hover:shadow-lg hover:ease-in-out duration-300">
                   Buy Now
                 </button>
               </div>
