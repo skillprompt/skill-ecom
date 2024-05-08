@@ -1,13 +1,15 @@
-import flowbite from "flowbite-react/tailwind";
+import flowbite from "flowbite-react/tailwind";       
 
 /** @type {import('tailwindcss').Config} */
 
 export const darkMode = ["class"];
 export const content = [
-  "./pages/**/*.{ts,tsx}",
-  "./components/**/*.{ts,tsx}",
-  "./app/**/*.{ts,tsx}",
-  "./src/**/*.{ts,tsx}",
+  './pages/**/*.{ts,tsx}',
+  './components/**/*.{ts,tsx}',
+  './app/**/*.{ts,tsx}',
+  './src/**/*.{ts,tsx}',
+  flowbite.content(),
+
 ];
 export const prefix = "";
 export const theme = {
@@ -97,5 +99,4 @@ export const theme = {
     },
   },
 };
-// eslint-disable-next-line no-undef
-export const plugins = [require("tailwindcss-animate")];
+
