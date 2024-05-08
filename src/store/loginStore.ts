@@ -41,6 +41,19 @@ export const useLoginStore = create<State & Action>((set) => ({
   setIsPasswordVisible: (newIsPasswordVisible) => set(() => ({isPasswordVisible: newIsPasswordVisible}))
 }));
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 type Tmenu={
   Menubar:boolean;
   setMenubar:(Menubar:boolean)=>void;
@@ -48,6 +61,6 @@ type Tmenu={
 
 export const MenuStore =create<Tmenu>((set)=>({
   Menubar:false,
-  setMenubar:(menubar)=> set(()=>({Menubar:menubar}))
+  setMenubar:(newMenubar)=> set(()=>({Menubar:newMenubar}))
 })) 
 

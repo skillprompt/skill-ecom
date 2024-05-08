@@ -1,7 +1,6 @@
 import { FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
-import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -16,32 +15,63 @@ import { IoMdClose } from "react-icons/io";
 
 import { MenuStore } from "@/store/loginStore";
 import { NavbarModal } from "./NavbarModal";
+import { useQuery } from "@tanstack/react-query";
+import { TGetProfile } from "@/types/GetProfileTypes";
 
 export function Navbar() {
-  const location = useLocation();
-  const path = location.pathname;
+  const path = useLocation().pathname;
+  const { Menubar, setMenubar } = MenuStore();
 
-  const Menubar = MenuStore((state) => state.Menubar);
-  const setMenubar = MenuStore((state) => state.setMenubar);
+  const { data } = useQuery<TGetProfile>({
+    queryKey: ["login"],
+    queryFn: async () => {
+      const response = await fetch(
+        "http://localhost:8080/api/v1/ecommerce/profile"
+      );
+      const data = await response.json();
+      return data;
+    },
+  });
+  console.log("checking api fetching...", data);
 
   return (
     <>
-      <div className="bg-white">
-        <div className="max-w-[1120px] mx-auto h-full flex justify-between items-center gap-10 p-3">
+      <div className=" bg-white">
+        <div className="max-w-[1200px] mx-auto h-full flex justify-between items-center gap-10 p-3  ">
           <img
             src="newTestLogo.png"
             alt="logo of haat bazaar"
             className="w-24 md:w-[140px] h-8"
           />
-          <div className="relative w-full self-center">
-            <CiSearch className="absolute w-4 h-5 md:w-6 md:h-[22px] left-3 top-3 opacity-[40%]" />
-
-            <input
-              type="search"
-              className="w-full p-2 md:p-3 bg-inputColor rounded-[8px] pl-8 md:pl-10 text-sm md:text-base"
-              placeholder="Search"
-              id="search"
-            />
+          <div className=" relative w-full self-center   ">
+            <form className="max-w-md mx-auto">
+              <div className="relative">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg
+                    className="w-4 h-4 text-gray-500 "
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="search"
+                  id="default-search"
+                  className="block w-full p-3 ps-10 text-sm bg-inputColor outline-1 outline-gray-400"
+                  placeholder="Search"
+                  required
+                />
+              </div>
+            </form>
           </div>
 
           <div className="hidden sm:flex gap-9 items-center justify-between w-full">
@@ -72,9 +102,9 @@ export function Navbar() {
               <DropdownMenuTrigger>
                 <FiUser className="w-6 h-7 cursor-pointer" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="shadow-lg bg-white">
+              <DropdownMenuContent className="drop-shadow-xl bg-white">
                 <Link to="/login">
-                  <DropdownMenuLabel className="hover:bg-[#808080]  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black p-2">
+                  <DropdownMenuLabel className="hover:bg-[#2E2E2E]  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black p-2 ">
                     <MdOutlineLogin size={16} />
                     <span>Login</span>
                   </DropdownMenuLabel>
@@ -82,21 +112,20 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <div>
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <FiUser className="w-6 h-5 cursor-pointer sm:hidden" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="shadow-sm bg-white">
-                <Link to="/login">
-                  <DropdownMenuLabel className="hover:bg-btnColor  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black">
-                    <MdOutlineLogin size={16} />
-                    <span>Login</span>
-                  </DropdownMenuLabel>
-                </Link>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <FiUser className="w-6 h-5 cursor-pointer sm:hidden" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="shadow-sm bg-white">
+              <Link to="/login">
+                <DropdownMenuLabel className="hover:bg-btnColor  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black  ">
+                  <MdOutlineLogin size={16} />
+                  <span>Login</span>
+                </DropdownMenuLabel>
+              </Link>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {Menubar ? (
             <IoMdClose

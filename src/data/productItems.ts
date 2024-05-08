@@ -1,0 +1,53 @@
+type TItems={
+    name:string;
+    noOfItems:number;
+    id:number
+}
+
+export const BrandData:TItems[]=[
+    {
+    id:1,
+    name:"Apple",
+    noOfItems:119
+},
+    {
+    id:2,
+    name:"Samsung",
+    noOfItems:120
+},
+    {
+    id:3,
+    name:"Xiaomi",
+    noOfItems:68
+},
+    {
+    id:4,
+    name:"POCO",
+    noOfItems:10
+},
+    {
+    id:5,
+    name:"OPPO",
+    noOfItems:38,
+    },
+    {
+    id:6,
+    name:"Honor",
+    noOfItems:77,
+    },
+    {
+    id:7,
+    name:"Nokia",
+    noOfItems:56,
+    },
+    {
+    id:8,
+    name:"IQ",
+    noOfItems:44,
+    },
+    {
+    id:9,
+    name:"Realme",
+    noOfItems:73,
+    }
+]

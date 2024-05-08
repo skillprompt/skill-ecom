@@ -16,6 +16,7 @@ import { NewPasswordForm } from "./components/NewPasswordForm";
 import { FooterComponent } from "./components/Footer";
 import { HomePageContainer } from "./components/HomePageContainer";
 import { ContractUsForm } from "./components/ContractUsForm";
+import { ProductsSidebar } from "./components/productsSide";
 
 import Detail from "./components/Detail";
 import CheckoutPage from "./components/CheckoutPage";
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <CheckoutPage />,
+      },
+      {
+        path: "/productsSidebar",
+        element: <ProductsSidebar />,
       },
     ],
   },
