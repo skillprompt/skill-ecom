@@ -2,7 +2,7 @@ import { MenuStore } from "@/store/loginStore";
 import { IoMdClose } from "react-icons/io";
 import { AiTwotoneHome } from "react-icons/ai";
 import { GrContactInfo } from "react-icons/gr";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
@@ -11,7 +11,7 @@ export const NavbarModal = () => {
   const Menubar = MenuStore((state) => state.Menubar);
   const setMenubar = MenuStore((state) => state.setMenubar);
   return (
-    <>
+    <AnimatePresence>
       <motion.div
         initial={{ scaleY: 0 }}
         animate={{
@@ -21,24 +21,24 @@ export const NavbarModal = () => {
             ease: "easeOut",
           },
         }}
+        exit={{
+          scaleY: 0,
+          transition: {
+            duration: 0.6,
+            ease: [0.26, 0, 0.45, 0],
+          },
+        }}
         className="w-full fixed  h-screen   sm:hidden origin-top z-10 left-0 top-0 bg-white"
       >
         <img src="/logo.png" className="w-24 p-2 absolute left-1 top-3" />
-        <motion.div
-          exit={{
-            scaleY: 0,
-            transition: {
-              duration: 0.5,
-              ease: "easeOut",
-            },
-          }}
+        <div
           onClick={() => {
             setMenubar(!Menubar);
           }}
-          className="block sm:hidden absolute right-1 top-3"
+          className="block sm:hidden absolute right-1 top-4 cursor-pointer"
         >
           <IoMdClose size={24} />
-        </motion.div>
+        </div>
         <div className="w-full h-full flex justify-center items-center">
           <div className="   h-full flex flex-col gap-4 items-start justify-center ">
             {" "}
@@ -79,6 +79,6 @@ export const NavbarModal = () => {
           </div>
         </div>
       </motion.div>
-    </>
+    </AnimatePresence>
   );
 };

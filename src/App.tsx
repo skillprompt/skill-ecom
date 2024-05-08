@@ -17,6 +17,7 @@ import { FooterComponent } from "./components/Footer";
 // import Detail from "./components/Detail";
 import { HomePageContainer } from "./components/HomePageContainer";
 import { ContractUsForm } from "./components/ContractUsForm";
+import { ProductsSidebar } from "./components/productsSide";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <div>This is the cart page</div>,
+      },
+      {
+        path: "/productsSidebar",
+        element: <ProductsSidebar />,
       },
     ],
   },
