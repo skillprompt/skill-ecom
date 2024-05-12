@@ -1,4 +1,3 @@
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { categories } from "../data/Categories";
 
 export function CategoryCard() {
@@ -7,10 +6,6 @@ export function CategoryCard() {
       <div className="w-[1120px] h-[192px] flex flex-col gap-8">
         <div className="flex justify-between">
           <p className="text-2xl font-medium">Browse By Category</p>
-          <div className="flex gap-6 text-2xl">
-            <FaChevronLeft />
-            <FaChevronRight />
-          </div>
         </div>
         <div className="flex justify-between">
           {categories.map((category) => {
