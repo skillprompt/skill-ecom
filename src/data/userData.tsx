@@ -34,4 +34,13 @@ export const userData: userData[] = [
     role: "Customers",
     email: "shyam@gmail.com",
   },
+  {
+    id: 3,
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZCPhbTui_xR90ZFymgdG9J5Lo9POqL-s8IA&s",
+
+    name: "Shyam",
+    role: "Customers",
+    email: "shyam@gmail.com",
+  },
 ];
