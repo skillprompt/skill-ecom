@@ -11,7 +11,7 @@ function AdminNavbar() {
         <input
           type="text"
           placeholder="search for product"
-          className=" pl-5  rounded-xl bg-[#F0F5FF] outline-none border h-10 w-[500px]"
+          className=" pl-5 rounded-xl bg-[#F0F5FF] outline-none border h-10 w-[500px]"
         />
         <IoIosSearch className=" text-[30px] absolute right-3 pt-2 " />
       </div>
