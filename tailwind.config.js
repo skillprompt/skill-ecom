@@ -1,3 +1,5 @@
+import flowbite from "flowbite-react/tailwind";       
+
 /** @type {import('tailwindcss').Config} */
 
 export const darkMode = ["class"];
@@ -6,6 +8,8 @@ export const content = [
   './components/**/*.{ts,tsx}',
   './app/**/*.{ts,tsx}',
   './src/**/*.{ts,tsx}',
+  flowbite.content(),
+
 ];
 export const prefix = "";
 export const theme = {
@@ -31,10 +35,14 @@ export const theme = {
       hoverButtonColour: "#41975b",
       closeModalButtonColour: "#2098d5",
       forgotPasswordColour: "#6C90C7",
-      customNotificationColour: "#2f2f2f",
       categoryBarColour: "#2E2E2E",
       buyNowButtonColour: "#000000",
       hoverBuyNowButtonColour: "#111111",
+      lessFocusTextColour: "#545454",
+      categoryCardContainerColour: "#FAFAFA",
+      categoryCardColour: "#EDEDED",
+      categoryCardActiveColour: "#F6F6F6",
+      productCardColour: "#F6F6F6",
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",
@@ -63,13 +71,13 @@ export const theme = {
       popover: {
         DEFAULT: "hsl(var(--popover))",
         foreground: "hsl(var(--popover-foreground))",
-
       },
       card: {
         DEFAULT: "hsl(var(--card))",
         foreground: "hsl(var(--card-foreground))",
       },
     },
+    plugins: [flowbite.plugin()],
     borderRadius: {
       lg: "var(--radius)",
       md: "calc(var(--radius) - 2px)",
@@ -91,5 +99,4 @@ export const theme = {
     },
   },
 };
-// eslint-disable-next-line no-undef
-export const plugins = [require("tailwindcss-animate")];
+

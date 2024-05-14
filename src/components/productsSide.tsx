@@ -18,7 +18,8 @@ export function ProductsSidebar() {
   const handleSliderChange = (value: number[]) => {
     setRange(value);
   };
-  const handleSearch = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSearch = (e: any) => {
     setBrandSearchModel(true);
     const searchvalue = e.target.value;
     setBrandSearch(searchvalue);
