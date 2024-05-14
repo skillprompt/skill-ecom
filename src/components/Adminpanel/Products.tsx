@@ -19,21 +19,20 @@ function Products() {
           </div>
         </div>
         <div className="flex gap-x-4">
-          <div className="flex bg-btnTxtColor shadow-xl items-center border h-8 w-28 gap-10 px-2 rounded-md">
+          <div className="flex bg-btnTxtColor shadow-xl items-center border h-8 w-28 gap-10 p-2 rounded-xl">
             <div>Show</div>
             <FaChevronDown />
           </div>
-          <div className="flex bg-btnTxtColor items-center shadow-xl border h-8 w-28 gap-10 px-1 rounded-md ">
+          <div className="flex bg-btnTxtColor items-center shadow-xl border h-8 w-28 gap-10 p-2 rounded-xl ">
             <div>Status</div>
             <FaChevronDown />
           </div>
         </div>
       </div>
 
-      <IoIosSearch className=" absolute text-[30px]  right-3 pt-2 " />
       <div className="overflow-x-auto ">
         <Table hoverable>
-          <Table.Head className="border-b border-black">
+          <Table.Head className="border-b border-black rounded-xl">
             <Table.HeadCell>Product name</Table.HeadCell>
             <Table.HeadCell>Categories</Table.HeadCell>
             <Table.HeadCell>Quantity</Table.HeadCell>

@@ -3,15 +3,15 @@ function AddProducts() {
     <>
       <div className="px-16 flex flex-col gap-y-10 w-full bg-[#E4E4E7] ">
         <div className="flex justify-between pt-14">
-          <div className="bg-btnColor rounded-lg font-bold text-btnTxtColor p-2 px-6 ">
+          <div className="bg-btnColor font-bold text-btnTxtColor rounded-xl p-2 px-6  ">
             Go to Product
           </div>
           <div className="font-bold  text-2xl">Add Products</div>
-          <div className="bg-btnColor rounded-lg font-bold text-btnTxtColor p-2 px-6 ">
+          <div className="bg-btnColor rounded-xl font-bold text-btnTxtColor p-2 px-6 ">
             Publish now
           </div>
         </div>
-        <div className="w-[800px] ">
+        <div className=" ">
           <div className="bg-btnTxtColor p-9 border rounded-xl shadow-lg">
             <form>
               <div className="flex flex-col gap-3">

@@ -18,11 +18,11 @@ function Orders() {
             <IoIosSearch className=" absolute text-[30px]  right-3 pt-2 " />
           </div>
           <div className="flex gap-4">
-            <div className="flex bg-btnTxtColor shadow-xl items-center border h-8 w-28 gap-10 px-2 rounded-md">
+            <div className="flex bg-btnTxtColor shadow-xl items-center border h-8 w-28 gap-10 px-2 rounded-xl">
               <div>Show</div>
               <FaChevronDown />
             </div>
-            <div className="flex bg-btnTxtColor items-center shadow-xl border h-8 w-28 gap-10 px-1 rounded-md ">
+            <div className="flex bg-btnTxtColor items-center shadow-xl border h-8 w-28 gap-10 px-1 rounded-xl ">
               <div>Status</div>
               <FaChevronDown />
             </div>
