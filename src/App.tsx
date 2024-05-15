@@ -21,6 +21,7 @@ import { ProductsSidebar } from "./components/productsSide";
 import Detail from "./components/Detail";
 import CheckoutPage from "./components/CheckoutPage";
 import { CategoryBar } from "./components/CategoryBar";
+import SearchPage from "./components/SearchPage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/productsSidebar",
         element: <ProductsSidebar />,
+      },
+      {
+        path: "/search",
+        element: <SearchPage />,
       },
     ],
   },
