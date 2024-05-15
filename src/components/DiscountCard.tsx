@@ -13,7 +13,7 @@ const DiscountCard = () => {
 
   return (
     <div className="h-[656px] w-full flex justify-center items-center">
-      <div className="h-[496px] w-[1120px] flex flex-col justify-between">
+      <div className="h-[496px] w-full px-56 flex flex-col justify-between">
         <div>
           <h1 className="text-2xl font-medium">Discount up to -50%</h1>
         </div>

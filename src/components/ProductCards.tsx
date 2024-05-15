@@ -13,9 +13,9 @@ export function ProductCards() {
 
   return (
     <div className="h-[1056px] flex justify-center items-center">
-      <div className="h-[944px] w-[1120px] flex flex-col justify-between">
+      <div className="h-[944px] w-full px-56 flex flex-col justify-between">
         <p className="text-lg font-medium underline">New Arrival</p>
-        <div className="h-[880px] flex flex-wrap justify-between gap-4">
+        <div className="h-fit grid grid-cols-5 gap-8">
           {products.map((product) => {
             return (
               <div
@@ -34,11 +34,13 @@ export function ProductCards() {
                       onClick={() => handleHeartClicked(product.id)}
                     />
                   )}
-                  <img
-                    className="cursor-pointer"
-                    src={product.image}
-                    alt={product.title}
-                  />
+                  <div className="h-40 w-40">
+                    <img
+                      className="cursor-pointer"
+                      src={product.image}
+                      alt={product.title}
+                    />
+                  </div>
                   <p className="font-medium text-base p-2">{product.title}</p>
                   <p className="font-semibold text-2xl">{product.price}</p>
                 </div>

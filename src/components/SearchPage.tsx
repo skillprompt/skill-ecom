@@ -85,9 +85,9 @@ const SearchPage = () => {
   const onPageChange = (page: number) => setCurrentPage(page);
 
   return (
-    <div className="h-[1600px] w-full flex justify-center gap-8 py-10">
+    <div className="h-[1600px] w-full flex justify-center gap-8 py-10 px-56">
       <ProductsSidebar />
-      <div className="w-[832px] h-screen flex flex-col gap-6">
+      <div className="w-full h-screen flex flex-col gap-6">
         <div className="w-full h-10 flex justify-between items-center">
           <p className="font-medium text-lessFocusTextColour">
             Selected Products:{" "}
@@ -104,11 +104,11 @@ const SearchPage = () => {
             <Dropdown.Item>Newest first</Dropdown.Item>
           </Dropdown>
         </div>
-        <div className="w-full h-full flex gap-x-4 gap-y-6 flex-wrap">
+        <div className="w-full h-full flex flex-wrap gap-y-6 justify-start lg:gap-x-[22px]">
           {searchContent.map((product) => {
             return (
               <div
-                className="h-[432px] w-[266.67px] bg-productCardColour rounded-[9px] relative flex flex-col justify-center items-center text-center gap-4 pt-12 px-1 hover:shadow-lg hover:ease-in-out duration-300"
+                className="h-[432px] w-72 bg-productCardColour rounded-[9px] relative flex flex-col justify-center items-center text-center gap-4 pt-12 px-1 hover:shadow-lg hover:ease-in-out duration-300"
                 key={product.id}
               >
                 <div className="flex flex-col items-center justify-between h-[70%]">

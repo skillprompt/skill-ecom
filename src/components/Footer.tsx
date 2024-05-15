@@ -1,6 +1,8 @@
 "use client";
-import { FaTwitter } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
+import InstagramIcon from "@/icons/footer/Instagram";
+import FacebookIcon from "@/icons/footer/Facebook";
+import TiktokIcon from "@/icons/footer/Tiktok";
+import TwitterIcon from "@/icons/footer/Twitter";
 export function FooterComponent() {
   return (
     <>
@@ -24,10 +26,10 @@ export function FooterComponent() {
 
             <div className="sm:flex sm:items-center sm:justify-between">
               <div className="mt-4 flex sm:mt-0 sm:justify-center space-x-[36px]">
-                <FaTwitter className="text-white" />
-                <FaFacebook className="text-white" />
-                <img src="tiktok.png" />
-                <img src="Instagram.png" />
+                <TwitterIcon />
+                <FacebookIcon />
+                <TiktokIcon />
+                <InstagramIcon />
               </div>
             </div>
           </div>

@@ -64,6 +64,27 @@ const searchData: TSearch[] = [
     price: "$1399",
     isFavourite: false,
   },
+  {
+    id: 9,
+    image: "/search/search5.png",
+    title: "Apple iPhone 14 Pro 1TB Gold (MQ2V3)",
+    price: "$1399",
+    isFavourite: false,
+  },
+  {
+    id: 10,
+    image: "/search/search6.png",
+    title: "Apple iPhone 14 Pro 128GB Deep Purple (MQ0G3)",
+    price: "$1799",
+    isFavourite: false,
+  },
+  // {
+  //   id: 11,
+  //   image: "/search/search7.png",
+  //   title: "Apple iPhone 13 mini 128GB Pink (MLK23)",
+  //   price: "$850",
+  //   isFavourite: false,
+  // },
 ];
 
 export default searchData;

@@ -47,7 +47,7 @@ export function CategoryBar() {
 
   return (
     <div className="flex justify-center bg-categoryBarColour">
-      <div className="h-12 flex justify-center w-[1120px] items-center text-gray-300">
+      <div className="h-12 flex justify-center w-full items-center text-gray-300 lg:px-56">
         {Categories.map((category) => {
           return (
             <div

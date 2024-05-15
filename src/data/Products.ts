@@ -57,6 +57,20 @@ const productsData: TProducts[] = [
     price: "$398",
     isFavourite: false,
   },
+  {
+    id: 8,
+    image: "samsungwatch.png",
+    title: "Samsung Galaxy Watch6 Classic 47mm Black",
+    price: "$369",
+    isFavourite: false,
+  },
+  {
+    id: 9,
+    image: "galaxyfoldphone.png",
+    title: "Galaxy Z Fold5 Unlocked | 256GB | Phantom Black",
+    price: "$1799",
+    isFavourite: false,
+  },
 ];
 
 export default productsData;

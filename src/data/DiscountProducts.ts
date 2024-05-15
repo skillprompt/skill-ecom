@@ -29,6 +29,13 @@ const discountProductsData: TProducts[] = [
     price: "$1499",
     isFavourite: false,
   },
+  {
+    id: 4,
+    image: "applewatch.png",
+    title: "Apple Watch Series 9 GPS 41mm Starlight Aluminium Case",
+    price: "$399",
+    isFavourite: false,
+  },
 ];
 
 export default discountProductsData;
