@@ -22,6 +22,7 @@ import Detail from "./components/Detail";
 import CheckoutPage from "./components/CheckoutPage";
 import { CategoryBar } from "./components/CategoryBar";
 import SearchPage from "./components/SearchPage";
+import Wishlist from "./components/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: <div>This is the wishlist page</div>,
+        element: <Wishlist />,
       },
       {
         path: "/cart",
