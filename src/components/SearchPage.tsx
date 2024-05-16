@@ -119,7 +119,7 @@ const SearchPage = () => {
                     />
                   ) : (
                     <CiHeart
-                      className="absolute right-4 top-6 text-3xl opacity-[30%] cursor-pointer"
+                      className="absolute right-4 top-6 text-3xl opacity-[30%] cursor-pointer text-green-600"
                       onClick={() => handleHeartClicked(product.id)}
                     />
                   )}

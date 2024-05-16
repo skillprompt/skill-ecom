@@ -2,7 +2,6 @@ import { MdDashboard } from "react-icons/md";
 import { BsCartCheck } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { MdAddShoppingCart } from "react-icons/md";
-import { RiArticleLine } from "react-icons/ri";
 import { LuPackageOpen } from "react-icons/lu";
 import { FaUserCog } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
@@ -14,13 +13,12 @@ const Sidebar = () => {
     <div className="">
       <div className=" justify-center  bg-[#2D3047]  w-64 text-white h-full ">
         <div className="flex justify-center pb-5">
-          <div className=" bg-[#374151]  flex w-[80%]  top-0  mt-10 pt-4 pb-4 pl-4 justify-center gap-2 ">
-            <FaUserCog className="text-5xl" />
+          <div className=" bg-[#374151]  flex w-[80%]  top-0  mt-10 pt-4 pb-4 justify-center gap-2 ">
+            <FaUserCog className="text-3xl" />
             <div className="flex-col">
               <h4 className=" text-[12px]  font-semibold ">Admin username</h4>
               <h4 className="text-[12px]  font-semibold ">
-                adminmail@gmail.<br></br>
-                com
+                adminmail@gmail.com
               </h4>
             </div>
           </div>
@@ -40,19 +38,6 @@ const Sidebar = () => {
             </div>
           </Link>
 
-          <Link to="/admin/categories">
-            <div
-              className={clsx(
-                "flex font-semibold text-[16px] px-12 py-4 gap-4 hover:bg-[#374151]",
-                path === "/admin/categories"
-                  ? "flex font-semibold text-[16px] px-12 py-4 gap-4  bg-[#374151] hover:bg-[#374151]"
-                  : ""
-              )}
-            >
-              <RiArticleLine className="text-[25px] " />
-              Categories
-            </div>
-          </Link>
           <Link to="/admin/products">
             <div
               className={clsx(
