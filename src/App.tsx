@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LoginPage } from "./components/LoginPage";
 import Adminpanel from "./components/Adminpanel/AdminPanel";
 import Dashboard from "./components/Adminpanel/Dashboard";
-import Categories from "./components/Adminpanel/Categories";
 import Products from "./components/Adminpanel/Products";
 import AddProducts from "./components/Adminpanel/AddProduct";
 import Orders from "./components/Adminpanel/Orders";
@@ -90,10 +89,6 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard",
         element: <Dashboard />,
-      },
-      {
-        path: "/admin/categories",
-        element: <Categories />,
       },
       {
         path: "/admin/products",

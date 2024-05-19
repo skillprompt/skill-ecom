@@ -60,7 +60,7 @@ function Products() {
                   {" "}
                   Rs. {data.price}
                 </Table.Cell>
-                <Table.Cell className="text-2xl flex items-center justify-center border-t border-slate-400">
+                <Table.Cell className="text-2xl px-12 border-t border-slate-400">
                   {data.viewimage}
                 </Table.Cell>
               </Table.Row>

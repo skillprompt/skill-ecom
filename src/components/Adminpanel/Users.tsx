@@ -8,7 +8,7 @@ function Users() {
     <>
       <div className=" w-full px-16">
         <div className="pt-8">
-          <button className="font-semibold float-right border bg-btnColor text-[#ffffff] px-2 p-1  ">
+          <button className="font-semibold float-right bg-btnColor text-[#ffffff] px-4 py-2 rounded-[4px]">
             Create new
           </button>
         </div>
@@ -19,22 +19,22 @@ function Users() {
               <input
                 type="text"
                 placeholder="Search..."
-                className=" pl-5   bg-btnTxtColor outline-none rounded-lg border-2 border-[#AAAAAA] h-10 w-[500px]"
+                className=" pl-5 rounded-xl bg-btnTxtColor outline-none border-2 border-[#AAAAAA] h-10 w-[500px]"
               />
               <IoIosSearch className=" absolute text-[30px] right-3 pt-2" />
             </div>
             <div className="flex space-x-4 ">
-              <div className="flex bg-btnTxtColor rounded-lg shadow-md items-center border h-8 w-28 gap-10 px-2">
+              <div className="flex bg-btnTxtColor rounded-xl shadow-md items-center border h-8 w-28 gap-10 px-2">
                 Show
                 <FaChevronDown />
               </div>
-              <div className="flex bg-btnTxtColor rounded-lg items-center shadow-md border h-8 w-28 gap-10 px-1">
+              <div className="flex bg-btnTxtColor rounded-xl items-center shadow-md border h-8 w-28 gap-10 px-1">
                 Status
                 <FaChevronDown />
               </div>
             </div>
           </div>
-          <div className=" flex border-2  gap-14 h-96 items-center justify-center">
+          <div className=" flex border-2 gap-14 h-96 items-center justify-center rounded-xl">
             <div className="grid grid-cols-4 gap-6 items-center  bg-btnTxtColor ">
               {userData.map((data) => (
                 <div
