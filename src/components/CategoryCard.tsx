@@ -2,12 +2,12 @@ import { categories } from "../data/Categories";
 
 export function CategoryCard() {
   return (
-    <div className="h-[352px] flex justify-center items-center bg-categoryCardContainerColour">
-      <div className="w-[1120px] h-[192px] flex flex-col gap-8">
+    <div className="h-[352px] w-full flex justify-center items-center bg-categoryCardContainerColour">
+      <div className="h-[192px] w-full flex flex-col gap-8 lg:px-56">
         <div className="flex justify-between">
           <p className="text-2xl font-medium">Browse By Category</p>
         </div>
-        <div className="flex justify-between">
+        <div className="w-full flex justify-between">
           {categories.map((category) => {
             return (
               <div

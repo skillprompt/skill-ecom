@@ -1,4 +1,4 @@
-type TProducts = {
+type TWishlist = {
   id: number;
   image: string;
   title: string;
@@ -6,4 +6,4 @@ type TProducts = {
   isFavourite: boolean;
 };
 
-export default TProducts;
+export default TWishlist;

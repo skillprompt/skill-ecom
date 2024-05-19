@@ -7,9 +7,9 @@ import { RiArrowUpSLine } from "react-icons/ri";
 const priceinput = "w-[35%] p-1.5 outline-slate-400 border border-slate-500";
 
 export function ProductsSidebar() {
-  const [pricebar, setPricebar] = useState(false);
-  const [brandbar, setBrandbar] = useState(false);
-  const [memorybar, setMemorybar] = useState(false);
+  const [pricebar, setPricebar] = useState(true);
+  const [brandbar, setBrandbar] = useState(true);
+  const [memorybar, setMemorybar] = useState(true);
   const [range, setRange] = useState<number[]>([5000, 8050]);
   const [brandSearch, setBrandSearch] = useState("");
   const [filter, setFilter] = useState(BrandData);
@@ -34,9 +34,9 @@ export function ProductsSidebar() {
 
   return (
     <>
-      <div className="w-[256px] border  flex flex-col gap-4 p-4">
+      <div className="w-[256px] flex flex-col gap-4 p-4">
         <div
-          className="flex justify-between px-3 py-2 shadow-md cursor-pointer"
+          className="flex justify-between px-3 py-2 border-b cursor-pointer"
           onClick={() => {
             setPricebar(!pricebar);
           }}
@@ -78,7 +78,7 @@ export function ProductsSidebar() {
         )}
         <div className="flex flex-col gap-4">
           <div
-            className="flex justify-between px-3 py-2 shadow-md  cursor-pointer "
+            className="flex justify-between px-3 py-2 border-b cursor-pointer "
             onClick={() => {
               setBrandbar(!brandbar);
             }}
@@ -141,7 +141,7 @@ export function ProductsSidebar() {
         </div>
         <div className="flex flex-col gap-4">
           <div
-            className="flex justify-between px-3 py-2 shadow-md  cursor-pointer "
+            className="flex justify-between px-3 py-2 border-b cursor-pointer "
             onClick={() => {
               setMemorybar(!memorybar);
             }}
