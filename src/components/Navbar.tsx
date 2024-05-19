@@ -17,9 +17,13 @@ import { MenuStore } from "@/store/loginStore";
 import { NavbarModal } from "./NavbarModal";
 import { useQuery } from "@tanstack/react-query";
 import { TGetProfile } from "@/types/GetProfileTypes";
+import useLoginModalStore from "@/store/loginModalStore";
+import LoginModal from "./LoginModal";
 
 export function Navbar() {
-  const path = useLocation().pathname;
+  const location = useLocation();
+  const path = location.pathname;
+
   const { Menubar, setMenubar } = MenuStore();
 
   const { data } = useQuery<TGetProfile>({
@@ -33,6 +37,8 @@ export function Navbar() {
     },
   });
   console.log("checking api fetching...", data);
+
+  const { setIsLoginModalOpen } = useLoginModalStore();
 
   return (
     <>
@@ -102,12 +108,13 @@ export function Navbar() {
               <FiUser className="w-6 h-7 cursor-pointer" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="drop-shadow-xl bg-white">
-              <Link to="/login">
-                <DropdownMenuLabel className="hover:bg-[#2E2E2E]  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black p-2 ">
-                  <MdOutlineLogin size={16} />
-                  <span>Login</span>
-                </DropdownMenuLabel>
-              </Link>
+              <DropdownMenuLabel
+                className="hover:bg-[#2E2E2E]  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black p-2"
+                onClick={() => setIsLoginModalOpen(true)}
+              >
+                <MdOutlineLogin size={16} />
+                <span>Login</span>
+              </DropdownMenuLabel>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -144,6 +151,7 @@ export function Navbar() {
           />
         )}
       </div>
+      <LoginModal />
 
       {Menubar && <NavbarModal />}
     </>
