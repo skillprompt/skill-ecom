@@ -156,7 +156,7 @@ const Register = () => {
               className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
             />
             {errors.username && (
-              <p className="text-red-500">{`${errors.username.message}`}</p>
+              <p className="text-red-500 text-sm">{`${errors.username.message}`}</p>
             )}
             {/* input for role */}
 
@@ -189,7 +189,9 @@ const Register = () => {
               className="p-2 border-2  outline-slate-400 text-[14px] text-light_black"
             />
             {errors.email && (
-              <p className="text-red-500">{`${errors.email.message}`} </p>
+              <p className="text-red-500 text-sm">
+                {`${errors.email.message}`}{" "}
+              </p>
             )}
             {/* input for password */}
             <div className="flex relative items-center">
@@ -206,7 +208,9 @@ const Register = () => {
             </div>
 
             {errors.password && (
-              <p className="text-red-500">{`${errors.password.message}`} </p>
+              <p className="text-red-500 text-sm">
+                {`${errors.password.message}`}{" "}
+              </p>
             )}
             {/* input for conformation password */}
             <div className="flex relative items-center">
@@ -229,7 +233,7 @@ const Register = () => {
               </div>
             </div>
             {errors.confirmPassword && (
-              <p className="text-red-500">
+              <p className="text-red-500 text-sm">
                 {`${errors.confirmPassword.message}`}{" "}
               </p>
             )}

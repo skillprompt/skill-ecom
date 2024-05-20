@@ -1,5 +1,3 @@
-import React from "react";
-
 import { FaMobileScreen } from "react-icons/fa6";
 import { BsCpuFill } from "react-icons/bs";
 import { RiCpuLine } from "react-icons/ri";

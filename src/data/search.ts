@@ -78,13 +78,6 @@ const searchData: TSearch[] = [
     price: "$1799",
     isFavourite: false,
   },
-  // {
-  //   id: 11,
-  //   image: "/search/search7.png",
-  //   title: "Apple iPhone 13 mini 128GB Pink (MLK23)",
-  //   price: "$850",
-  //   isFavourite: false,
-  // },
 ];
 
 export default searchData;
