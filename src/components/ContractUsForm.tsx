@@ -5,8 +5,8 @@ export function ContractUsForm() {
   const [openModal, setOpenModal] = useState(false);
 
   return (
-    <div className="h-[80vh] flex justify-center items-center bg-[#EDEDED] lg:px-[675px] pt-12 pb-10">
-      <div className="bg-white h-full w-full flex flex-col items-center p-10 rounded-xl shadow-xl gap-8">
+    <div className="h-[80vh] w-full flex justify-center items-center bg-[#EDEDED] pt-12 pb-10">
+      <div className="bg-white h-full w-[550px] flex flex-col items-center p-10 rounded-xl shadow-xl gap-8">
         <div>
           <h1 className="text-3xl font-medium">Contact Us</h1>
         </div>

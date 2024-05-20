@@ -7,7 +7,7 @@ export default function DarkHeadPhonesIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_979_870)">
+      <g clipPath="url(#clip0_979_870)">
         <path
           d="M14 26H12C9.79086 26 8 27.7909 8 30V36C8 38.2091 9.79086 40 12 40H14C16.2091 40 18 38.2091 18 36V30C18 27.7909 16.2091 26 14 26Z"
           stroke="black"

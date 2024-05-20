@@ -7,7 +7,7 @@ export default function DarkComputerIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_979_877)">
+      <g clipPath="url(#clip0_979_877)">
         <path
           d="M40 8H8C6.89543 8 6 8.89543 6 10V30C6 31.1046 6.89543 32 8 32H40C41.1046 32 42 31.1046 42 30V10C42 8.89543 41.1046 8 40 8Z"
           stroke="black"

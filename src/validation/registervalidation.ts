@@ -1,14 +1,20 @@
-import {z} from "zod"
+import { z } from "zod";
 
- export const registerSchema = z
+export const registerSchema = z
   .object({
-    username: z.string().trim().min(1,{message:"required"}).toLowerCase(),
+    username: z
+      .string()
+      .trim()
+      .min(1, { message: "required" })
+      .max(20, "Username must not exceed 20 characters")
+      .toLowerCase(),
     email: z.string().email({
       message: "Please enter a valid email address",
     }),
-    role: z.string().trim().min(1,{message:"required"}).toUpperCase(),
+    role: z.string().trim().min(1, { message: "required" }).toUpperCase(),
     password: z
-      .string().trim()
+      .string()
+      .trim()
       .min(8, { message: "Password must be at least 8 character" }),
     confirmPassword: z.string(),
   })
