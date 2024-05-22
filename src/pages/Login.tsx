@@ -2,17 +2,15 @@ import { useMutation } from "@tanstack/react-query";
 import { TLoginUserInput, TLoginUserOutput } from "../types/type";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { ForgotPasswordModal } from "./ForgotPasswordModal";
+import { ForgotPasswordModal } from "../components/ForgotPasswordModal";
 import { useLoginStore } from "../store/loginStore";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export function LoginPage() {
   const {
-    username,
-    setUsername,
-    password,
-    setPassword,
     isForgotPasswordModalOpen,
     setIsForgotPasswordModalOpen,
     isPasswordVisible,
@@ -21,12 +19,20 @@ export function LoginPage() {
 
   const navigate = useNavigate();
 
-  const UserSchema = z.object({
+  const LoginSchema = z.object({
     username: z
       .string()
-      .min(1, "Username can't be that short")
+      .min(4, "Username can't be that short")
       .max(20, "Username can't exceed 20 characters"),
-    password: z.string().min(8),
+    password: z.string().min(8, "Password can't be that short"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TLoginUserInput>({
+    resolver: zodResolver(LoginSchema),
   });
 
   const loginMutation = useMutation<TLoginUserOutput, Error, TLoginUserInput>({
@@ -46,7 +52,6 @@ export function LoginPage() {
     },
     onSuccess: (data) => {
       if (data.statusCode === 200) {
-        setPassword("");
         navigate("/");
       } else {
         toast.error(data.message);
@@ -58,17 +63,12 @@ export function LoginPage() {
     },
   });
 
-  const handleLoginUserSubmission = async () => {
-    try {
-      const validatedData = UserSchema.parse({ username, password });
-      loginMutation.mutateAsync(validatedData);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        const errorMessage = error.issues.map((issue) => issue.message);
-        toast.error(errorMessage);
-      } else {
-        toast.error("An unexpected error occured. Please try again later!");
-      }
+  const handleLoginUserSubmission = async (data: TLoginUserInput) => {
+    const isValidData = LoginSchema.safeParse(data);
+    if (isValidData.success) {
+      loginMutation.mutateAsync(data);
+    } else {
+      toast.error(isValidData.error.message);
     }
   };
 
@@ -88,59 +88,45 @@ export function LoginPage() {
       <div className="flex justify-center items-center text-center rounded-2xl lg:w-[50%] lg:h-full">
         <div className="bg-white w-[350px] h-[400px] rounded-xl shadow-xl border lg:w-[444px] lg:h-[503px]">
           <form
-            className="w-full h-[80%] flex flex-col justify-center px-8"
-            onSubmit={(event) => {
-              event.preventDefault();
-              handleLoginUserSubmission();
-            }}
+            className="w-full h-[80%] flex flex-col justify-center px-8 gap-2"
+            onSubmit={handleSubmit(handleLoginUserSubmission)}
           >
             <h1 className="text-base lg:text-lg">Log into Haat Bazaar</h1>
-            <div>
+            <div className="flex flex-col">
               <input
                 className="w-full mt-3 text-sm p-2 lg:mt-5 lg:text-base border"
                 type="text"
                 placeholder="Username*"
-                value={username}
-                required
-                onChange={(event) => {
-                  setUsername(event.target.value);
-                }}
+                {...register("username")}
               />
+              {errors.username && (
+                <p className="text-red-500 text-sm">
+                  {errors.username.message}
+                </p>
+              )}
             </div>
-            <div className="relative flex">
-              {isPasswordVisible ? (
-                <input
-                  className="w-full my-3 text-sm p-2 lg:my-5 lg:text-base border"
-                  type="text"
-                  placeholder="Password*"
-                  value={password}
-                  required
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                  }}
-                />
-              ) : (
-                <input
-                  className="w-full my-3 text-sm p-2 lg:my-5 lg:text-base border"
-                  type="password"
-                  placeholder="Password*"
-                  value={password}
-                  required
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                  }}
-                />
+            <div className="relative flex flex-col">
+              <input
+                className="w-full my-3 text-sm p-2 lg:text-base border"
+                type={isPasswordVisible ? "text" : "password"}
+                placeholder="Password*"
+                {...register("password")}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
               )}
               {isPasswordVisible ? (
                 <FaEye
-                  className="absolute right-1 top-6 lg:right-2 lg:top-8 cursor-pointer opacity-[60%]"
+                  className="absolute right-1 top-6 lg:right-2 lg:top-[26px] cursor-pointer opacity-[60%]"
                   onClick={() => {
                     setIsPasswordVisible(!isPasswordVisible);
                   }}
                 />
               ) : (
                 <FaEyeSlash
-                  className="absolute right-1 top-6 lg:right-2 lg:top-8 cursor-pointer opacity-[60%]"
+                  className="absolute right-1 top-6 lg:right-2 lg:top-[26px] cursor-pointer opacity-[60%]"
                   onClick={() => {
                     setIsPasswordVisible(!isPasswordVisible);
                   }}
@@ -159,7 +145,7 @@ export function LoginPage() {
               Forgot Password?
             </p>
           </form>
-          <Link to="/register" onClick={() => setPassword("")}>
+          <Link to="/register">
             <button className="text-white bg-buttonColour text-sm lg:text-[17px] p-2 lg:px-4 hover:bg-hoverButtonColour">
               Create New Account
             </button>

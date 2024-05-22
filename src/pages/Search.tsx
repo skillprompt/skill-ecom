@@ -1,11 +1,9 @@
-"use client";
-
 import { FaHeart } from "react-icons/fa";
-import { ProductsSidebar } from "./productsSide";
+import { ProductsSidebar } from "../components/productsSide";
 import { CiHeart } from "react-icons/ci";
 import useSearchStore from "@/store/searchStore";
-import SearchPagination from "./FlowbiteReact/SearchPagination";
-import SearchFilterDropdown from "./FlowbiteReact/SearchFilterDropdown";
+import SearchPagination from "../components/FlowbiteReact/SearchPagination";
+import SearchFilterDropdown from "../components/FlowbiteReact/SearchFilterDropdown";
 
 const SearchPage = () => {
   const { searchContent, setSearchContent } = useSearchStore();
@@ -27,7 +25,7 @@ const SearchPage = () => {
           </p>
           <SearchFilterDropdown />
         </div>
-        <div className="w-full h-full flex flex-wrap gap-y-6 justify-start lg:gap-x-[22px]">
+        <div className="w-full h-fit flex flex-wrap gap-y-6 lg:gap-x-[23.2px]">
           {searchContent.map((product) => {
             return (
               <div

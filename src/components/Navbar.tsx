@@ -12,12 +12,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MdOutlineLogin } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
-
 import { MenuStore } from "@/store/loginStore";
 import { NavbarModal } from "./NavbarModal";
 import { useQuery } from "@tanstack/react-query";
 import { TGetProfile } from "@/types/GetProfileTypes";
-import useLoginModalStore from "@/store/loginModalStore";
 import LoginModal from "./FlowbiteReact/LoginModal";
 import SearchIcon from "@/icons/navbar/Search";
 
@@ -38,8 +36,6 @@ export function Navbar() {
     },
   });
   console.log("checking api fetching...", data);
-
-  const { setIsLoginModalOpen } = useLoginModalStore();
 
   return (
     <>
@@ -95,13 +91,12 @@ export function Navbar() {
               <FiUser className="w-6 h-7 cursor-pointer" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="drop-shadow-xl bg-white">
-              <DropdownMenuLabel
-                className="hover:bg-[#2E2E2E]  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black p-2"
-                onClick={() => setIsLoginModalOpen(true)}
-              >
-                <MdOutlineLogin size={16} />
-                <span>Login</span>
-              </DropdownMenuLabel>
+              <Link to="/login">
+                <DropdownMenuLabel className="hover:bg-[#2E2E2E]  duration-500 hover:text-btnTxtColor cursor-pointer flex items-center gap-2 text-black p-2">
+                  <MdOutlineLogin size={16} />
+                  <span>Login</span>
+                </DropdownMenuLabel>
+              </Link>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

@@ -1,8 +1,8 @@
 import "./App.css";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import Register from "./components/Register";
+import Register from "./pages/Register";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { LoginPage } from "./components/LoginPage";
+import { LoginPage } from "./pages/Login";
 import Adminpanel from "./components/Adminpanel/AdminPanel";
 import Dashboard from "./components/Adminpanel/Dashboard";
 import Products from "./components/Adminpanel/Products";
@@ -13,15 +13,14 @@ import { Navbar } from "./components/Navbar";
 import { Toaster } from "sonner";
 import { NewPasswordForm } from "./components/NewPasswordForm";
 import { FooterComponent } from "./components/Footer";
-import { HomePageContainer } from "./components/HomePageContainer";
-import { ContractUsForm } from "./components/ContractUsForm";
+import { HomePage } from "./pages/Home";
+import { ContractUsPage } from "./pages/ContactUs";
 import { ProductsSidebar } from "./components/productsSide";
-
 import Detail from "./components/Detail";
-import CheckoutPage from "./components/CheckoutPage";
+import CheckoutPage from "./pages/Checkout";
 import { CategoryBar } from "./components/CategoryBar";
-import SearchPage from "./components/SearchPage";
-import Wishlist from "./components/Wishlist";
+import SearchPage from "./pages/Search";
+import WishlistPage from "./pages/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -37,15 +36,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePageContainer />,
+        element: <HomePage />,
       },
       {
         path: "/contactUs",
-        element: <ContractUsForm />,
+        element: <ContractUsPage />,
       },
       {
         path: "/wishlist",
-        element: <Wishlist />,
+        element: <WishlistPage />,
       },
       {
         path: "/cart",
@@ -73,11 +72,6 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
-  },
-
-  {
-    path: "login",
-    element: <LoginPage />,
   },
   {
     path: "/admin",

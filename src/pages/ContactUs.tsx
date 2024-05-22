@@ -1,7 +1,7 @@
 import { Modal } from "flowbite-react";
 import { useState } from "react";
 
-export function ContractUsForm() {
+export function ContractUsPage() {
   const [openModal, setOpenModal] = useState(false);
 
   return (
