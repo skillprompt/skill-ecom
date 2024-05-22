@@ -1,11 +1,9 @@
-"use client";
-
 import useWishlistStore from "@/store/wishlistStore";
 import { useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
-import RemoveWishlistModal from "./FlowbiteReact/RemoveWishlistModal";
+import RemoveWishlistModal from "../components/FlowbiteReact/RemoveWishlistModal";
 
-const Wishlist = () => {
+const WishlistPage = () => {
   const {
     wishlists,
     total,
@@ -66,4 +64,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export default WishlistPage;

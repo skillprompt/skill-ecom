@@ -1,5 +1,5 @@
-import CheckoutCart from "./CheckoutCart";
-import CheckoutTab from "./CheckoutTab";
+import CheckoutCart from "../components/CheckoutCart";
+import CheckoutTab from "../components/CheckoutTab";
 
 export default function CheckoutPage() {
   return (
