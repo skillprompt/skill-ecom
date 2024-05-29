@@ -48,6 +48,7 @@ export function LoginPage() {
         }),
       });
       const data = await response.json();
+      console.log("Data after loging in ", data);
       return data;
     },
     onSuccess: (data) => {
