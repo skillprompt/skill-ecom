@@ -21,6 +21,7 @@ import CheckoutPage from "./pages/Checkout";
 import { CategoryBar } from "./components/CategoryBar";
 import SearchPage from "./pages/Search";
 import WishlistPage from "./pages/Wishlist";
+import Category from "./components/Adminpanel/Category";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/admin/category",
+        element: <Category />,
       },
       {
         path: "/admin/products",

@@ -38,6 +38,20 @@ const Sidebar = () => {
             </div>
           </Link>
 
+          <Link to="/admin/category">
+            <div
+              className={clsx(
+                "text-[16px] font-semibold flex gap-4 px-12 py-4 hover:bg-[#374151]",
+                path === "/admin/category"
+                  ? "text-[16px] font-semibold flex gap-4 px-12 py-2 bg-[#374151] hover:bg-[#374151]"
+                  : ""
+              )}
+            >
+              <MdDashboard className="text-white  text-[25px]" />
+              Category
+            </div>
+          </Link>
+
           <Link to="/admin/products">
             <div
               className={clsx(
