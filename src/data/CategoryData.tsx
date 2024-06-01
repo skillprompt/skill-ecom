@@ -1,71 +1,69 @@
-import { MdDelete } from "react-icons/md";
-import { MdModeEditOutline } from "react-icons/md";
 type TCategoryData = {
-  categories: string;
-  id: number;
-  edit: React.ReactNode;
-  delete: React.ReactNode;
+  name: string;
+  id: string;
+  createdAt: string;
+  lastUpdatedAt: string;
 };
 
-export const category: TCategoryData[] = [
+export const categories: TCategoryData[] = [
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete className="text-red-500 text-xl text-center" />,
+    name: "laptop",
+    id: "0",
+    createdAt: "asdflkjdsfl",
+    lastUpdatedAt: "asdfasd",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "1",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "2",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "3",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "4",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "5",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "6",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "7",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "8",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
   {
-    categories: "laptop",
-    id: 1,
-    edit: <MdModeEditOutline />,
-    delete: <MdDelete />,
+    name: "laptop",
+    id: "9",
+    createdAt: "",
+    lastUpdatedAt: "",
   },
 ];

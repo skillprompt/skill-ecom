@@ -21,6 +21,8 @@ export const theme = {
   },
   extend: {
     colors: {
+      mainTheme: "#39844F",
+      hoverMainTheme: "#41975b",
       btnColor: "#39844F",
       btnTxtColor: "#ffffff",
       inputColor: "#F0F5FF",

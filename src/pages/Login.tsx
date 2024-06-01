@@ -53,7 +53,9 @@ export function LoginPage() {
     },
     onSuccess: (data) => {
       if (data.statusCode === 200) {
-        navigate("/");
+        data.data.user.role === "ADMIN"
+          ? navigate("/admin/Dashboard")
+          : navigate("/");
       } else {
         toast.error(data.message);
       }
