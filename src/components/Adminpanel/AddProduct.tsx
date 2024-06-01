@@ -1,102 +1,180 @@
-function AddProducts() {
+import { ProductSchema } from "@/validation/addProductValidation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { FileInput, Label } from "flowbite-react";
+import { useMutation } from "@tanstack/react-query";
+import {
+  TCreateProductInput,
+  TCreateProductOutput,
+} from "@/types/TCreateProduct";
+
+const AddProducts = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TCreateProductInput>({
+    resolver: zodResolver(ProductSchema),
+  });
+
+  const createProductMutation = useMutation<
+    TCreateProductOutput,
+    Error,
+    TCreateProductInput
+  >({
+    mutationFn: async (body) => {
+      const response = await fetch(
+        "http://localhost:8080/api/v1/ecommerce/products",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            category: body.category,
+            description: body.description,
+            mainImage: body.mainImage,
+            name: body.name,
+            price: body.price,
+            stock: body.stock,
+            subImages: body.subImages,
+          }),
+        }
+      );
+      const data = response.json();
+      console.log("Data ", data);
+      return data;
+    },
+  });
+
+  const handlePublish = async (data: TCreateProductInput) => {
+    const isValidData = ProductSchema.safeParse(data);
+    if (isValidData.success) {
+      console.log("Success ", isValidData.data);
+      createProductMutation.mutateAsync(data);
+    } else {
+      console.log("Error ", isValidData.error.message);
+    }
+  };
+
   return (
     <>
-      <div className="px-16 flex flex-col gap-y-10 w-full bg-[#E4E4E7] ">
+      <form
+        className="px-16 flex flex-col gap-y-10 w-full bg-[#E4E4E7]"
+        onSubmit={handleSubmit(handlePublish)}
+      >
         <div className="flex justify-between pt-14">
-          <div className="bg-btnColor font-bold text-btnTxtColor rounded-xl p-2 px-6  ">
+          <button
+            className="bg-buttonColour hover:bg-hoverButtonColour ease-in-out duration-300 font-bold text-btnTxtColor rounded-xl p-2 px-6 cursor-pointer"
+            type="button"
+          >
             Go to Product
-          </div>
+          </button>
           <div className="font-bold  text-2xl">Add Products</div>
-          <div className="bg-btnColor rounded-xl font-bold text-btnTxtColor p-2 px-6 ">
+          <button className="bg-buttonColour hover:bg-hoverButtonColour ease-in-out duration-300 rounded-xl font-bold text-btnTxtColor p-2 px-6 cursor-pointer">
             Publish now
-          </div>
+          </button>
         </div>
-        <div className=" ">
+        <div>
           <div className="bg-btnTxtColor p-9 border rounded-xl shadow-lg">
-            <form>
-              <div className="flex flex-col gap-3">
-                <div className=" flex flex-col gap-y-3">
-                  <label
-                    htmlFor="Product title"
-                    className=" text-catogriesBg font-bold"
-                  >
-                    Product Title
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Type Here"
-                    className=" px-4 py-2 border border-slate-400 rounded-2xl"
-                  />
-                </div>
-                <div className=" flex flex-col gap-y-3">
-                  <label
-                    htmlFor="Price"
-                    className="block text-catogriesBg font-bold"
-                  >
-                    Price
-                  </label>
-                  <input
-                    type="text"
-                    id="Price"
-                    name="Price"
-                    placeholder="Type Here"
-                    className="w-full px-4 py-2 border border-slate-400 rounded-2xl"
-                  />
-                </div>
-                <div className=" flex flex-col gap-y-3">
-                  <label
-                    htmlFor="Price"
-                    className="block text-catogriesBg font-bold"
-                  >
-                    Count in stocks
-                  </label>
-                  <input
-                    type="text"
-                    id="Price"
-                    name="Price"
-                    placeholder="Type Here"
-                    className="w-full px-4 py-2 border border-slate-400 rounded-2xl"
-                  />
-                </div>
-                <div className=" flex flex-col gap-y-3">
-                  <label
-                    htmlFor="Description"
-                    className="block text-catogriesBg font-semibold"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    id="Description"
-                    name="Description"
-                    placeholder="Type Here"
-                    className="w-full px-4 py-2 h-36 border border-slate-400 rounded-2xl "
-                  ></textarea>
-                </div>
-                <div className=" flex flex-col gap-y-3">
-                  <label
-                    htmlFor="image"
-                    className="block text-catogriesBg font-semibold"
-                  >
-                    Image
-                  </label>
-                  <div className="flex relative">
-                    <input
-                      type="file"
-                      id="pngFile"
-                      name="pngFile"
-                      accept=".png"
-                      placeholder="Enter image URL"
-                    />
-                  </div>
-                </div>
+            <div className="flex flex-col gap-3">
+              <div className=" flex flex-col gap-y-3">
+                <label
+                  htmlFor="Product title"
+                  className=" text-catogriesBg font-bold"
+                >
+                  Product Title
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Type Here"
+                  className=" px-4 py-2 border border-slate-400 rounded-2xl"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <span className="text-red-500">{errors.name.message}</span>
+                )}
               </div>
-            </form>
+              <div className=" flex flex-col gap-y-3">
+                <label
+                  htmlFor="price"
+                  className="block text-catogriesBg font-bold"
+                >
+                  Price
+                </label>
+                <input
+                  type="text"
+                  id="price"
+                  placeholder="Type Here"
+                  className="w-full px-4 py-2 border border-slate-400 rounded-2xl"
+                  {...register("price", { valueAsNumber: true })}
+                />
+                {errors.price && (
+                  <span className="text-red-500">{errors.price.message}</span>
+                )}
+              </div>
+              <div className="flex flex-col gap-y-3">
+                <label
+                  htmlFor="stock"
+                  className="block text-catogriesBg font-bold"
+                >
+                  Count in stocks
+                </label>
+                <input
+                  type="text"
+                  id="stock"
+                  placeholder="Type Here"
+                  className="w-full px-4 py-2 border border-slate-400 rounded-2xl"
+                  {...register("stock", { valueAsNumber: true })}
+                />
+                {errors.stock && (
+                  <span className="text-red-500">{errors.stock.message}</span>
+                )}
+              </div>
+              <div className=" flex flex-col gap-y-3">
+                <label
+                  htmlFor="description"
+                  className="block text-catogriesBg font-semibold"
+                >
+                  Description
+                </label>
+                <textarea
+                  id="description"
+                  placeholder="Type Here"
+                  className="w-full px-4 py-2 h-36 border border-slate-400 rounded-2xl"
+                  {...register("description")}
+                ></textarea>
+                {errors.description && (
+                  <span className="text-red-500">
+                    {errors.description.message}
+                  </span>
+                )}
+              </div>
+              <div>
+                <div>
+                  <Label
+                    htmlFor="file-upload-helper-text"
+                    value="Upload file"
+                  />
+                </div>
+                <FileInput
+                  id="file-upload-helper-text"
+                  helperText="Only PNG files (MAX. 800x400px)."
+                  {...register("mainImage")}
+                  multiple={false}
+                />
+                {errors.mainImage && (
+                  <span className="text-red-500">
+                    {JSON.stringify(errors.mainImage.message)}
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
-}
+};
 export default AddProducts;

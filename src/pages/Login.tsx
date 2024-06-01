@@ -48,11 +48,14 @@ export function LoginPage() {
         }),
       });
       const data = await response.json();
+      console.log("Data after loging in ", data);
       return data;
     },
     onSuccess: (data) => {
       if (data.statusCode === 200) {
-        navigate("/");
+        data.data.user.role === "ADMIN"
+          ? navigate("/admin/Dashboard")
+          : navigate("/");
       } else {
         toast.error(data.message);
       }

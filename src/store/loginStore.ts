@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 type State = {
+  password: string;
   isForgotPasswordModalOpen: boolean;
   forgotPasswordEmail: string;
   isSubmitting: boolean;
@@ -10,6 +11,7 @@ type State = {
 };
 
 type Action = {
+  setPassword: (password: string) => void;
   setIsForgotPasswordModalOpen: (isForgotPasswordModalOpen: boolean) => void;
   setForgotPasswordEmail: (forgotPasswordEmail: string) => void;
   setIsSubmitting: (isSubmitting: boolean) => void;
@@ -19,12 +21,14 @@ type Action = {
 };
 
 export const useLoginStore = create<State & Action>((set) => ({
+  password: "",
   isForgotPasswordModalOpen: false,
   forgotPasswordEmail: "",
   isSubmitting: false,
   resetToken: "",
   updatedPassword: "",
   isPasswordVisible: false,
+  setPassword: (newPassword) => set(() => ({ password: newPassword })),
   setIsForgotPasswordModalOpen: (newIsForgotPasswordModalOpen) =>
     set(() => ({ isForgotPasswordModalOpen: newIsForgotPasswordModalOpen })),
   setForgotPasswordEmail: (newForgotPasswordEmail) =>
