@@ -1,9 +1,62 @@
-import { IoIosSearch } from "react-icons/io";
+("");
+import { IoIosSearch, IoMdEye } from "react-icons/io";
 import { FaChevronDown } from "react-icons/fa";
 import { Table } from "flowbite-react";
-import { products } from "../../data/productData";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
+
+interface Idata {
+  statusCode: 200;
+  data: {
+    products: [
+      {
+        _id: string;
+        category: string;
+        description: string;
+        mainImage: {
+          url: string;
+          localPath: string;
+          _id: string;
+        };
+        name: string;
+        owner: string;
+        price: number;
+        stock: number;
+        subImages: [string, string, string, string];
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+      }
+    ];
+    totalProducts: number;
+    limit: number;
+    page: number;
+    totalPages: number;
+    serialNumberStartFrom: number;
+    hasPrevPage: boolean;
+    hasNextPage: boolean;
+    prevPage: null | string;
+    nextPage: null | string;
+  };
+  message: string;
+  success: boolean;
+}
 
 function Products() {
+  const { data, error, isLoading } = useQuery<Idata>({
+    queryKey: ["productData"],
+    queryFn: () =>
+      fetch(
+        "http://localhost:8080/api/v1/ecommerce/products?page=1&limit=10"
+      ).then((res) => res.json()),
+  });
+
+  if (isLoading) return "Loading...";
+
+  if (error) return "There is an error: " + error.message;
+
+  console.log("Data", data);
+
   return (
     <div className=" flex  flex-col py-10 px-16 gap-10 w-full bg-[#a7a7aa13]">
       <div className="flex justify-between w-full">
@@ -32,7 +85,7 @@ function Products() {
 
       <div className="overflow-x-auto ">
         <Table hoverable>
-          <Table.Head className="border-b border-black rounded-xl">
+          <Table.Head className="border-b    border-black rounded-xl">
             <Table.HeadCell>Product name</Table.HeadCell>
             <Table.HeadCell>Categories</Table.HeadCell>
             <Table.HeadCell>Quantity</Table.HeadCell>
@@ -40,32 +93,36 @@ function Products() {
             <Table.HeadCell>Price</Table.HeadCell>
             <Table.HeadCell>View image</Table.HeadCell>
           </Table.Head>
-          {products.map((data) => (
-            <Table.Body className="divide-y">
-              <Table.Row className="bg-white">
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 border-b border-slate-400">
-                  {" "}
-                  {data.productname}
-                </Table.Cell>
-                <Table.Cell className="border-b border-slate-400">
-                  {data.categories}
-                </Table.Cell>
-                <Table.Cell className="border-b border-slate-400">
-                  {data.quantity}
-                </Table.Cell>
-                <Table.Cell className="border-b border-slate-400">
-                  {data.company}
-                </Table.Cell>
-                <Table.Cell className="border-b border-slate-400">
-                  {" "}
-                  Rs. {data.price}
-                </Table.Cell>
-                <Table.Cell className="text-2xl px-12 border-t border-slate-400">
-                  {data.viewimage}
-                </Table.Cell>
-              </Table.Row>
-            </Table.Body>
-          ))}
+          {data &&
+            data.data.products.map((product) => (
+              <Table.Body className="divide-y" key={product._id}>
+                <Table.Row className="bg-white">
+                  <Table.Cell className="whitespace-nowrap font-bold text-black border-b border-slate-400">
+                    {product.name}
+                  </Table.Cell>
+                  <Table.Cell className="border-b border-slate-400">
+                    {product.category}
+                  </Table.Cell>
+                  <Table.Cell className="border-b border-slate-400">
+                    {product.stock}
+                  </Table.Cell>
+                  <Table.Cell className="border-b text-black border-slate-400">
+                    {product.owner}
+                  </Table.Cell>
+                  <Table.Cell className="border-b border-slate-400">
+                    {" "}
+                    Rs. {product.price}
+                  </Table.Cell>
+                  <Table.Cell className="text-2xl px-12 border-t border-slate-400">
+                    <Link to={product.mainImage.url} target="_blank">
+                      <div className="text-black">
+                        <IoMdEye />
+                      </div>
+                    </Link>
+                  </Table.Cell>
+                </Table.Row>
+              </Table.Body>
+            ))}
         </Table>
       </div>
     </div>

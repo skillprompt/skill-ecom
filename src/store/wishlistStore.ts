@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import TWishlist from "@/types/TWishlist";
-import wishlistData from "@/data/wishlistData";
+import wishlistData from "@/icons/wishlistData";
 
 type TWishlistState = {
   wishlists: TWishlist[];
