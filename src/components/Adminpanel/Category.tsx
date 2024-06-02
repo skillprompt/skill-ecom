@@ -25,7 +25,6 @@ const Category = () => {
         }
       );
       const data = response.json();
-      console.log("Categories data ", data);
       return data;
     },
   });

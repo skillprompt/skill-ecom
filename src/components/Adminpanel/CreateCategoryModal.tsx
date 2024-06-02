@@ -39,12 +39,14 @@ const CreateCategoryModal = () => {
     TCreateCategoryInput
   >({
     mutationFn: async (body) => {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await fetch(
         "http://localhost:8080/api/v1/ecommerce/categories",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
             name: body.name,
@@ -52,7 +54,6 @@ const CreateCategoryModal = () => {
         }
       );
       const data = await response.json();
-      console.log("data ", data);
       return data;
     },
     onSuccess: (data) => {
@@ -61,6 +62,7 @@ const CreateCategoryModal = () => {
         queryClient.invalidateQueries({
           queryKey: ["/api/v1/ecommerce/categories"],
         });
+        toggleCreateCategoryModal();
       } else {
         toast.error(data.message);
       }
@@ -71,7 +73,6 @@ const CreateCategoryModal = () => {
   });
 
   const handleCreateCategory = (data: TCreateCategoryInput) => {
-    console.log("Testing");
     const isValidEntry = CreateCategorySchema.safeParse(data);
     if (isValidEntry.success) {
       CreateCategoryMutation.mutateAsync(data);

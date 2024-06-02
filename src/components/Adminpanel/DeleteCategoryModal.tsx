@@ -18,15 +18,17 @@ const DeleteCategoryModal = () => {
     name: z
       .string()
       .refine((value) => value === `Category/${categoryToBeDeleted.name}`, {
-        message: "The input doesn't match",
+        message: "Please follow the above instructions properly!",
       }),
   });
+
+  type TDeleteCategory = z.infer<typeof DeleteCategorySchema>;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TDeleteCategoryInput>({
+  } = useForm<TDeleteCategory>({
     resolver: zodResolver(DeleteCategorySchema),
   });
 
@@ -38,17 +40,18 @@ const DeleteCategoryModal = () => {
     TDeleteCategoryInput
   >({
     mutationFn: async (body) => {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await fetch(
         `http://localhost:8080/api/v1/ecommerce/categories/${body.id}`,
         {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
       const data = await response.json();
-      console.log("Data ", data);
       return data;
     },
     onSuccess: (data) => {
@@ -57,6 +60,7 @@ const DeleteCategoryModal = () => {
         queryClient.invalidateQueries({
           queryKey: ["/api/v1/ecommerce/categories"],
         });
+        toggleDeleteCategoryModal();
       } else {
         toast.error(data.message);
       }
@@ -66,10 +70,10 @@ const DeleteCategoryModal = () => {
     },
   });
 
-  const handleDeleteCategory = (data: TDeleteCategoryInput) => {
+  const handleDeleteCategory = (data: TDeleteCategory) => {
     const isValidEntry = DeleteCategorySchema.safeParse(data);
     if (isValidEntry.success) {
-      DeleteCategoryMutation.mutateAsync(data);
+      DeleteCategoryMutation.mutateAsync(categoryToBeDeleted);
     } else {
       toast.error(isValidEntry.error.message);
     }
@@ -102,7 +106,10 @@ const DeleteCategoryModal = () => {
               <span className="text-red-500">{errors.name.message}</span>
             )}
           </div>
-          <button className="p-3 text-white bg-slate-500 hover:bg-slate-600 hover:text-red-500 duration-300 ease-in-out font-semibold rounded-xl">
+          <button
+            disabled={DeleteCategoryMutation.isPending}
+            className="p-3 text-white bg-slate-500 hover:bg-slate-600 hover:text-red-500 duration-300 ease-in-out font-semibold rounded-xl"
+          >
             Delete this category
           </button>
         </div>
