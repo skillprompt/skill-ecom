@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 const EditCategoryModal = () => {
-  const { toggleEditCategoryModal } = useCategoryStore();
+  const { categoryToBeEdited, toggleEditCategoryModal } = useCategoryStore();
 
   const EditCategorySchema = z.object({
     name: z
@@ -26,6 +26,10 @@ const EditCategoryModal = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<TEditCategoryInput>({
+    defaultValues: {
+      id: categoryToBeEdited.id,
+      name: categoryToBeEdited.name,
+    },
     resolver: zodResolver(EditCategorySchema),
   });
 
@@ -37,13 +41,18 @@ const EditCategoryModal = () => {
     TEditCategoryInput
   >({
     mutationFn: async (body) => {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await fetch(
         `http://localhost:8080/api/v1/ecommerce/categories/${body.id}`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
           },
+          body: JSON.stringify({
+            name: body.name,
+          }),
         }
       );
       const data = await response.json();
@@ -55,6 +64,7 @@ const EditCategoryModal = () => {
         queryClient.invalidateQueries({
           queryKey: ["/api/v1/ecommerce/categories"],
         });
+        toggleEditCategoryModal();
       } else {
         toast.error(data.message);
       }
@@ -67,7 +77,11 @@ const EditCategoryModal = () => {
   const handleEditCategory = (data: TEditCategoryInput) => {
     const isValidEntry = EditCategorySchema.safeParse(data);
     if (isValidEntry.success) {
-      EditCategoryMutation.mutateAsync(data);
+      const updatedCategory: TEditCategoryInput = {
+        ...categoryToBeEdited,
+        name: data.name,
+      };
+      EditCategoryMutation.mutateAsync(updatedCategory);
     } else {
       toast.error(isValidEntry.error.message);
     }
@@ -88,7 +102,7 @@ const EditCategoryModal = () => {
           <MdModeEditOutline />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label htmlFor="edit-category">Enter new Category name below:</label>
+          <label htmlFor="edit-category">Enter new category name below:</label>
           <div className="flex flex-col gap-1">
             <input
               type="text"
@@ -100,7 +114,10 @@ const EditCategoryModal = () => {
               <span className="text-red-500">{errors.name.message}</span>
             )}
           </div>
-          <button className="bg-buttonColour hover:bg-hoverButtonColour duration-300 ease-in-out text-white p-3 rounded-xl font-semibold">
+          <button
+            className="bg-buttonColour hover:bg-hoverButtonColour duration-300 ease-in-out text-white p-3 rounded-xl font-semibold"
+            disabled={EditCategoryMutation.isPending}
+          >
             Update Category
           </button>
         </div>

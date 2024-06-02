@@ -1,4 +1,4 @@
-import { MdDashboard } from "react-icons/md";
+import { MdCategory, MdDashboard } from "react-icons/md";
 import { BsCartCheck } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { MdAddShoppingCart } from "react-icons/md";
@@ -47,7 +47,7 @@ const Sidebar = () => {
                   : ""
               )}
             >
-              <MdDashboard className="text-white  text-[25px]" />
+              <MdCategory className="text-white  text-[25px]" />
               Category
             </div>
           </Link>

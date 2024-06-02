@@ -7,6 +7,7 @@ import {
   TCreateProductInput,
   TCreateProductOutput,
 } from "@/types/TCreateProduct";
+import { toast } from "sonner";
 
 const AddProducts = () => {
   const {
@@ -23,12 +24,14 @@ const AddProducts = () => {
     TCreateProductInput
   >({
     mutationFn: async (body) => {
+      const accessToken = localStorage.getItem("accessToken");
       const response = await fetch(
         "http://localhost:8080/api/v1/ecommerce/products",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
             category: body.category,
@@ -42,7 +45,6 @@ const AddProducts = () => {
         }
       );
       const data = response.json();
-      console.log("Data ", data);
       return data;
     },
   });
@@ -50,10 +52,9 @@ const AddProducts = () => {
   const handlePublish = async (data: TCreateProductInput) => {
     const isValidData = ProductSchema.safeParse(data);
     if (isValidData.success) {
-      console.log("Success ", isValidData.data);
       createProductMutation.mutateAsync(data);
     } else {
-      console.log("Error ", isValidData.error.message);
+      toast.error(isValidData.error.message);
     }
   };
 

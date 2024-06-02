@@ -53,6 +53,7 @@ export function LoginPage() {
     },
     onSuccess: (data) => {
       if (data.statusCode === 200) {
+        localStorage.setItem("accessToken", data.data.accessToken);
         data.data.user.role === "ADMIN"
           ? navigate("/admin/Dashboard")
           : navigate("/");
